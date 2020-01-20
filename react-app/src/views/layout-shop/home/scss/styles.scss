@@ -20,8 +20,8 @@
 .card-header-loc {
     position: relative;
     display: flex;
-    width: 1400px;
-    height: 500px;
+    width: 1000px;
+    height: 400px;
     margin: 0 auto;
     .child {
         flex: 1;
@@ -74,12 +74,15 @@
             }
         }
         .wrapper-list {
-            position: relative;
+            position: absolute;
+            width: 800px;
+            top: 100px;
+            left: 30px;
         }
         .card-product {
             position: relative;
             max-width: 250px;
-            min-height: 410px;
+            min-height: 400px;
             overflow: hidden;
             // display: inline-block;
             // margin-right: 30px;
@@ -119,8 +122,10 @@
     }
 
     .full-screen {
-        width: 500px;
-        height: 500px;
+        min-width: 400px;
+        min-height: 400px;
+        width: 400px;
+        height: 400px;
         border-top-left-radius: 20px;
         border-bottom-left-radius: 20px;
         overflow: hidden;
@@ -159,7 +164,7 @@
         .add-item {
             position: absolute;
             right: 20px;
-            bottom: 30px;
+            top: 30px;
             transition: all .15s ease;
             img {
                 width: 50px;
@@ -380,3 +385,4 @@
 .shadow-text {
     text-shadow: 2px 2px #333;
 }
+

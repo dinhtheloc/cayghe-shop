@@ -1,0 +1,19 @@
+#mobile-image {
+    display: none;
+}
+
+
+@media (max-width: 768px) {
+    #pc-image {
+        display: none;
+    }
+
+    #mobile-image {
+        display: initial;
+    }
+
+    .image-container {
+        width: 100%;
+    }
+
+}

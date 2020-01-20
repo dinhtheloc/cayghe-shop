@@ -6,17 +6,14 @@ import {
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
-import Slider from '@material-ui/core/Slider';
 import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card';
-import CardMedia from '@material-ui/core/CardMedia';
-import CardContent from '@material-ui/core/CardContent';
 import { numberFormat } from '../../../common/numberFormat';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import ModalImage from './modalImage/modalImage';
 import Button from '@material-ui/core/Button';
 import "./styles.scss";
+import "./m-styles.scss";
 const useStyles = makeStyles(theme => ({
     card: {
         maxWidth: 345,
@@ -45,7 +42,6 @@ const useStyles = makeStyles(theme => ({
     },
     gridList: {
         flexWrap: 'nowrap',
-        // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
         transform: 'translateZ(0)',
     },
 
@@ -88,7 +84,7 @@ export default function Sneaker() {
     const dataImage = product['dataImage'] || []
     const price = numberFormat(product.price || 0);
     return (
-        <div>
+        <>
             <Typography variant="h2" component="div" gutterBottom>
                 <Box textAlign="center" component="p" m={1}>
                     <span style={bold}>{product.nameTitle} '{product.nameDisplay}'</span>
@@ -104,20 +100,31 @@ export default function Sneaker() {
                     <span style={{ margin: '0px 10px' }}>|</span>
                     <span style={{ color: '#66bb6a' }}>100% Authentic</span>
                     <span style={{ margin: '0px 10px' }}>|</span>
-                    <Button 
-                    onClick={() => {
-                        window.open(product.urlShopee, '_blank');
-                    }}
-                    variant="contained" color="primary">
+                    <Button
+                        onClick={() => {
+                            window.open(product.urlShopee, '_blank');
+                        }}
+                        variant="contained" color="primary">
                         Mua ngay
                     </Button>
                 </Box>
             </Typography>
 
-            <div className={classes.root}>
+            <div id="pc-image" className={classes.root}>
                 <GridList cellHeight={700} className={classes.gridList} cols={6}>
                     {dataImage.map((item, index) => (
                         <GridListTile key={index} className={classes.gridList} cols={item.col} >
+                            <img className="image-product" onClick={() => handleClickOpen(item.image)}
+                                alt={index}
+                                src={item.image} />
+                        </GridListTile>
+                    ))}
+                </GridList>
+            </div>
+            <div>
+                <GridList cellHeight={700} cols={1}>
+                {dataImage.map((item, index) => (
+                        <GridListTile key={index} cols={1} >
                             <img className="image-product" onClick={() => handleClickOpen(item.image)}
                                 alt={index}
                                 src={item.image} />
@@ -245,6 +252,6 @@ export default function Sneaker() {
                     </Grid>
                 </div>
             </div> */}
-        </div>
+        </>
     );
 }
