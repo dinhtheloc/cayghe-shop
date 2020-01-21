@@ -90,18 +90,18 @@ export default function Login() {
               <h4 className="display-4 mb-0 light">Most</h4>
               <h4 className="display-4 mb-0">Popular</h4>
             </div>
-            <div className="d-flex justify-content-between pagination-icon">
+            {/* <div className="d-flex justify-content-between pagination-icon">
               <div className="icon-left">
                 <img src={leftIcon}></img>
               </div>
               <div className="icon-right">
                 <img src={rightIcon}></img>
               </div>
-            </div>
-            {/* 
+            </div> */}
+            
             <div className="search-item">
               <img src={searchIcon}></img>
-            </div> */}
+            </div>
           </div>
 
           <div className="wrapper-list d-flex justify-content-between">

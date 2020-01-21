@@ -1,6 +1,6 @@
 import express from 'express';
 import { register, login, logout } from './controllers/auth-controller';
-import { getListProduct, getProduct } from './controllers/product-controller';
+import { getListProduct, getProduct, getProductRelated } from './controllers/product-controller';
 import { checkIfAuthenticated } from './middlewares/auth-middleware';
 const router = express.Router();
 
@@ -14,7 +14,6 @@ router.get('/data', checkIfAuthenticated, async (_, res) => {
 
 router.get('/get-list-products', getListProduct);
 router.get('/get-product/:alias', getProduct);
-
-
+router.get('/get-product-related/:alias', getProductRelated);
 
 export default router;

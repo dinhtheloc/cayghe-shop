@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import {
-    useParams
+    useParams, Link
 } from "react-router-dom";
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
@@ -44,7 +44,15 @@ const useStyles = makeStyles(theme => ({
         flexWrap: 'nowrap',
         transform: 'translateZ(0)',
     },
-
+    productRelated: {
+        maxWidth: 250,
+        margin: '0 auto',
+        paddingBottom: 20,
+        height: 350
+    },
+    nameDisplay: {
+        padding: '0 20px 20px 20px'
+    }
 }));
 export default function Sneaker() {
 
@@ -57,6 +65,7 @@ export default function Sneaker() {
     const [urlImage, setUrlImage] = useState('');
     const [product, setProduct] = useState({});
     const [open, setOpen] = useState(false);
+    const [dataRelated, setDataRelated] = useState([]);
 
     const handleClickOpen = (image) => {
         setUrlImage(image);
@@ -72,8 +81,18 @@ export default function Sneaker() {
             .then(res => res.json())
             .then(
                 (result) => {
-                    console.log('result =>', result);
                     setProduct(result[alias]);
+                },
+                (error) => {
+                    console.log(error);
+                }
+            )
+
+        fetch(`${process.env.REACT_APP_API_KEY}/get-product-related/${alias}`)
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    setDataRelated(result);
                 },
                 (error) => {
                     console.log(error);
@@ -111,9 +130,9 @@ export default function Sneaker() {
             </Typography>
 
             <div id="pc-image" className={classes.root}>
-                <GridList cellHeight={700} className={classes.gridList} cols={6}>
+                <GridList cellHeight={700} cols={6}>
                     {dataImage.map((item, index) => (
-                        <GridListTile key={index} className={classes.gridList} cols={item.col} >
+                        <GridListTile key={index}  cols={2} >
                             <img className="image-product" onClick={() => handleClickOpen(item.image)}
                                 alt={index}
                                 src={item.image} />
@@ -121,9 +140,9 @@ export default function Sneaker() {
                     ))}
                 </GridList>
             </div>
-            <div>
+            <div id="mobile-image">
                 <GridList cellHeight={700} cols={1}>
-                {dataImage.map((item, index) => (
+                    {dataImage.map((item, index) => (
                         <GridListTile key={index} cols={1} >
                             <img className="image-product" onClick={() => handleClickOpen(item.image)}
                                 alt={index}
@@ -175,83 +194,30 @@ export default function Sneaker() {
             </div>
 
 
-            {/* <div className="product-related-products-wrap">
+            <div className="product-related-products-wrap">
                 <div className="product-related-products">
                     <div className="banner">You May Also Like</div>
                     <Grid container spacing={5}>
-                        <Grid item xs>
-                            <Card>
-                                <CardMedia
-                                    className={classes.media}
-                                    image="https://stockx.imgix.net/adidas-Yeezy-Boost-350-V2-Yecheil-Product.jpg"
-                                    title="Paella dish"
-                                />
-                                <CardContent>
-                                    <Typography variant="body2" color="textSecondary" component="p">
-                                        Adidas Yeezy Boost 350 V2 Yecheil
-                                </Typography>
-                                </CardContent>
-                            </Card>
-                        </Grid>
-                        <Grid item xs>
-                            <Card>
-                                <CardMedia
-                                    className={classes.media}
-                                    image="https://stockx.imgix.net/adidas-Yeezy-Boost-350-V2-Yecheil-Product.jpg"
-                                    title="Paella dish"
-                                />
-                                <CardContent>
-                                    <Typography variant="body2" color="textSecondary" component="p">
-                                        Adidas Yeezy Boost 350 V2 Yecheil
-                                </Typography>
-                                </CardContent>
-                            </Card>
-                        </Grid>
-                        <Grid item xs>
-                            <Card>
-                                <CardMedia
-                                    className={classes.media}
-                                    image="https://stockx.imgix.net/adidas-Yeezy-Boost-350-V2-Yecheil-Product.jpg"
-                                    title="Paella dish"
-                                />
-                                <CardContent>
-                                    <Typography variant="body2" color="textSecondary" component="p">
-                                        Adidas Yeezy Boost 350 V2 Yecheil
-                                </Typography>
-                                </CardContent>
-                            </Card>
-                        </Grid>
-                        <Grid item xs>
-                            <Card>
-                                <CardMedia
-                                    className={classes.media}
-                                    image="https://stockx.imgix.net/adidas-Yeezy-Boost-350-V2-Yecheil-Product.jpg"
-                                    title="Paella dish"
-                                />
-                                <CardContent>
-                                    <Typography variant="body2" color="textSecondary" component="p">
-                                        Adidas Yeezy Boost 350 V2 Yecheil
-                                </Typography>
-                                </CardContent>
-                            </Card>
-                        </Grid>
-                        <Grid item xs>
-                            <Card>
-                                <CardMedia
-                                    className={classes.media}
-                                    image="https://stockx.imgix.net/adidas-Yeezy-Boost-350-V2-Yecheil-Product.jpg"
-                                    title="Paella dish"
-                                />
-                                <CardContent>
-                                    <Typography variant="body2" color="textSecondary" component="p">
-                                        Adidas Yeezy Boost 350 V2 Yecheil
-                                </Typography>
-                                </CardContent>
-                            </Card>
-                        </Grid>
+                        {dataRelated ? dataRelated.map((item, index) => (
+                            <Grid key={index} item xs>
+                                <a style={{
+                                    textDecoration: 'none',
+                                    color: '#000'
+                                    }
+                                } href={`/sneakers/${item.alias}`}>
+                                    <div className={`card card-lift--hover border-0 card-product ${classes.productRelated}`}>
+                                        <img src={item.image} />
+                                        <div className={classes.content}>
+                                            <h4 className="display-4 mb-0 light">{item.nameTitle}</h4>
+                                            <h4 className={`display-4 mb-0 ${classes.nameDisplay}`}>'{item.nameDisplay}'</h4>
+                                        </div>
+                                    </div>
+                                </a>
+                            </Grid>
+                        )) : ''}
                     </Grid>
                 </div>
-            </div> */}
+            </div>
         </>
     );
 }
