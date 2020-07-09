@@ -7,9 +7,8 @@ import { UsersRoutes } from "../routes/user_routes";
 import { CommonRoutes } from "../routes/common_routes";
 
 class App {
-
    public app: express.Application;
-   public mongoUrl: string = 'mongodb://localhost/' + environment.getDBName();
+   public mongoUrl: string = 'mongodb+srv://cayghedb.hovqv.gcp.mongodb.net/<dbname>' + environment.getDBName();
 
    private test_routes: TestRoutes = new TestRoutes();
    private usersRoutes: UsersRoutes = new UsersRoutes();
