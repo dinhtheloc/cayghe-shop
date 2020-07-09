@@ -1,6 +1,2 @@
 
-react-app/node_modules/
-
-react-app/build/
-
-server/node_modules/
+backend/node_modules/
