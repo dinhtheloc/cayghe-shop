@@ -1,20 +1,34 @@
+
+
 import { Application } from 'express';
-import app from '../config/app';
-import {UPLOAD_CONFIG} from '../config/configUpload';
+import { insufficientParameters, mongoError, successResponse, failureResponse } from '../modules/common/service';
+import { imageFilter } from '../utils/utils';
+import * as multer from 'multer';
+
 
 export class UploadsRoutes {
-    public route(application: Application) {
 
-        application.post('/profile', UPLOAD_CONFIG.single('avatar'), async (req, res) => {
-            console.log(req);
+    private upload = multer({ dest: `${process.env.UPLOAD_PATH}/`, fileFilter: imageFilter });
+
+    public route(application: Application) {
+        application.post('/api/uploadImage', this.upload.single('image'), async (req, res, err) => {
+
+                if (err instanceof multer.MulterError) {
+                    insufficientParameters(res);
+                } else if (err) {
+                    insufficientParameters(res);
+                }
+            if (req['file']) {
+                
+            } else {
+                insufficientParameters(res);
+            }
             // try {
-                // const col = await loadCollection(COLLECTION_NAME, db);
-                // const data = col.insert(req.file);
-        
-                // db.saveDatabase();
-                // res.send({ id: data.$loki, fileName: data.filename, originalName: data.originalname });
+            //     console.log(req['file']);
+            //     // res.send({ id: data.$loki, fileName: data.filename, originalName: data.originalname });
+            //     successResponse('create user successfull', req, res);
             // } catch (err) {
-                // res.sendStatus(400);
+            //     insufficientParameters(res);
             // }
         })
 
