@@ -1,25 +1,26 @@
 import * as express from "express";
 import * as bodyParser from "body-parser";
 import * as mongoose from 'mongoose';
-import environment from "../environment";
 import { TestRoutes } from "../routes/test_routes";
 import { UsersRoutes } from "../routes/user_routes";
+import { UploadsRoutes } from "../routes/uploadImage_routes";
 import { CommonRoutes } from "../routes/common_routes";
+
 
 class App {
    public app: express.Application;
-   public mongoUrl: string = 'mongodb+srv://cayghedb.hovqv.gcp.mongodb.net/<dbname>' + environment.getDBName();
 
    private test_routes: TestRoutes = new TestRoutes();
    private usersRoutes: UsersRoutes = new UsersRoutes();
+   private uploadsRoutes: UploadsRoutes = new UploadsRoutes();
    private common_routes: CommonRoutes = new CommonRoutes();
-
    constructor() {
       this.app = express();
       this.config();
       this.mongoSetup();
       this.test_routes.route(this.app);
       this.usersRoutes.route(this.app);
+      this.uploadsRoutes.route(this.app);
       this.common_routes.route(this.app);
    }
 
@@ -31,7 +32,7 @@ class App {
    }
 
    private mongoSetup(): void {
-      mongoose.connect(this.mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false });
+      mongoose.connect(process.env.URL_MONGODB, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false });
    }
 
 }

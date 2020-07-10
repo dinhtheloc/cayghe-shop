@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+require('dotenv').config();
 const app_1 = require("./config/app");
-const environment_1 = require("./environment");
-const PORT = environment_1.default.getPort();
+const PORT = process.env.PORT;
 app_1.default.listen(PORT, () => {
     console.log('Express server listening on port ' + PORT);
 });
