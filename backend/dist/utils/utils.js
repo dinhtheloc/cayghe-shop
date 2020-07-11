@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.changeToSlug = exports.imageFilter = void 0;
+exports.checkIfUnencryptedPasswordIsValid = exports.changeToSlug = exports.imageFilter = void 0;
+const bcrypt = require("bcryptjs");
 const imageFilter = function (req, file, cb) {
     // accept image only
     if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
@@ -37,3 +38,7 @@ const changeToSlug = (name) => {
     return slug;
 };
 exports.changeToSlug = changeToSlug;
+const checkIfUnencryptedPasswordIsValid = (unencryptedPassword, password) => {
+    return bcrypt.compareSync(unencryptedPassword, password);
+};
+exports.checkIfUnencryptedPasswordIsValid = checkIfUnencryptedPasswordIsValid;

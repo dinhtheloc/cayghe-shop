@@ -2,6 +2,7 @@
 
 import { Application, Request, Response } from 'express';
 import { ProductsController } from '../controllers/productsController';
+import { checkJwt } from "../middlewares/checkJwt";
 export class ProductRoutes {
     private productsController = new ProductsController();
     public route(app: Application) {
@@ -9,8 +10,7 @@ export class ProductRoutes {
             this.productsController.createProduct(req, res);
         });
 
-
-        app.get('/api/getProducts', (req: Request, res: Response) => {
+        app.get('/api/getProducts', [checkJwt] , (req: Request, res: Response) => {
             this.productsController.getProducts(req, res);
         });
 

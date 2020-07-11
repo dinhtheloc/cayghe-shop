@@ -1,3 +1,5 @@
+import * as bcrypt from "bcryptjs";
+
 const imageFilter = function (req, file, cb) {
     // accept image only
     if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
@@ -35,5 +37,10 @@ const changeToSlug = (name: string) => {
     return slug;
 };
 
+const checkIfUnencryptedPasswordIsValid = (unencryptedPassword, password) => {
+    return bcrypt.compareSync(unencryptedPassword, password);
+}
 
-export { imageFilter, changeToSlug }
+
+
+export { imageFilter, changeToSlug, checkIfUnencryptedPasswordIsValid }
