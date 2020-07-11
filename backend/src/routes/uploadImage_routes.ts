@@ -1,36 +1,26 @@
 
 
-import { Application } from 'express';
-import { insufficientParameters, mongoError, successResponse, failureResponse } from '../modules/common/service';
+import { Application, Request, Response } from 'express';
 import { imageFilter } from '../utils/utils';
+import { FileImageController } from '../controllers/fileImageController';
 import * as multer from 'multer';
-
 
 export class UploadsRoutes {
 
     private upload = multer({ dest: `${process.env.UPLOAD_PATH}/`, fileFilter: imageFilter });
+    private fileImage_controller: FileImageController = new FileImageController();
 
-    public route(application: Application) {
-        application.post('/api/uploadImage', this.upload.single('image'), async (req, res, err) => {
+    public route(app: Application) {
+        app.post('/api/uploadImage', this.upload.single('image'), async (req, res) => {
+            this.fileImage_controller.create_fileImage(req, res);
+        });
 
-                if (err instanceof multer.MulterError) {
-                    insufficientParameters(res);
-                } else if (err) {
-                    insufficientParameters(res);
-                }
-            if (req['file']) {
-                
-            } else {
-                insufficientParameters(res);
-            }
-            // try {
-            //     console.log(req['file']);
-            //     // res.send({ id: data.$loki, fileName: data.filename, originalName: data.originalname });
-            //     successResponse('create user successfull', req, res);
-            // } catch (err) {
-            //     insufficientParameters(res);
-            // }
-        })
+        app.get('/api/getImage', (req: Request, res: Response) => {
+            this.fileImage_controller.getFileImage(req, res);
+        });
 
+        app.delete('/api/deleteImage', (req: Request, res: Response) => {
+            this.fileImage_controller.delete_fileImage(req, res);
+        });
     }
 }

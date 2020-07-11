@@ -1,0 +1,20 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const test_routes_1 = require("../routes/test_routes");
+const user_routes_1 = require("../routes/user_routes");
+const uploadImage_routes_1 = require("../routes/uploadImage_routes");
+const product_routes_1 = require("../routes/product_routes");
+const common_routes_1 = require("../routes/common_routes");
+const configRouters = (app) => {
+    const test_routes = new test_routes_1.TestRoutes();
+    const usersRoutes = new user_routes_1.UsersRoutes();
+    const uploadsRoutes = new uploadImage_routes_1.UploadsRoutes();
+    const common_routes = new common_routes_1.CommonRoutes();
+    const productRoutes = new product_routes_1.ProductRoutes();
+    test_routes.route(app);
+    usersRoutes.route(app);
+    uploadsRoutes.route(app);
+    productRoutes.route(app);
+    common_routes.route(app);
+};
+exports.default = configRouters;
