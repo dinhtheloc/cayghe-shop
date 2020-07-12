@@ -7,29 +7,42 @@
             <form class="form" [formGroup]="loginForm" (ngSubmit)="login()">
               <div class="card card-login card-white">
                 <div class="card-header">
-                  <img src="https://demos.creative-tim.com/marketplace/black-dashboard-pro/assets/img/card-primary.png" alt="">
+                  <img src="https://demos.creative-tim.com/marketplace/black-dashboard-pro/assets/img/card-primary.png"
+                    alt="">
                   <h1 class="card-title">Log in</h1>
                 </div>
                 <div class="card-body">
-                  <div class="input-group">
+                  <div class="input-group" [ngClass]="{ 
+                    'has-danger': submitted && f.email.errors,
+                    'input-group-focus': isFocusEmail
+                  }">
                     <div class="input-group-prepend">
                       <div class="input-group-text">
                         <i class="tim-icons icon-email-85"></i>
                       </div>
                     </div>
-                    <input type="text" class="form-control" placeholder="Email">
+                    <input type="text" (focus)="isFocusEmail = true" (focusout)="isFocusEmail = false"
+                      formControlName="email" class="form-control" placeholder="Email">
                   </div>
-                  <div class="input-group">
+                  <div *ngIf="submitted && f.email.errors" class="form-text">
+                    <p class="text-danger" *ngIf="f.email.errors.required">Email is required</p>
+                  </div>
+                  <div class="input-group" [ngClass]="{ 'has-danger': submitted && f.password.errors,
+                    'input-group-focus': isFocusPassword}">
                     <div class="input-group-prepend">
                       <div class="input-group-text">
                         <i class="tim-icons icon-lock-circle"></i>
                       </div>
                     </div>
-                    <input type="text" placeholder="Password" class="form-control">
+                    <input (focus)="isFocusPassword = true" (focusout)="isFocusPassword = false" type="password"
+                      formControlName="password" placeholder="Password" class="form-control">
+                  </div>
+                  <div *ngIf="submitted && f.password.errors" class="form-text">
+                    <p class="text-danger" *ngIf="f.password.errors.required">Password is required</p>
                   </div>
                 </div>
                 <div class="card-footer">
-                  <a href="#pablo" class="btn btn-primary btn-lg btn-block mb-3">Get Started</a>
+                  <button type="submit" class="btn btn-primary btn-lg btn-block mb-3">Get Started</button>
                 </div>
               </div>
             </form>

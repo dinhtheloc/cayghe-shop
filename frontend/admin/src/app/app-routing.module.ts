@@ -8,16 +8,15 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   {
     path: '',
-    component: AdminLayoutComponent,
-    children: [
-      { path: 'dashboard', component: DashboardComponent },
-    ]
-    , canActivate: [AuthGuard]
+    redirectTo: '/dashboard',
+    pathMatch: 'full',
   },
   {
     path: '',
-    redirectTo: '/dashboard',
-    pathMatch: 'full',
+    component: AdminLayoutComponent,
+    children: [
+      { path: 'dashboard', component: DashboardComponent },
+    ], canActivate: [AuthGuard]
   },
   {
     path: '**',

@@ -15,6 +15,7 @@ class AuthController {
     let { email, password } = req.body;
     if (!(email && password)) {
       res.status(400).send();
+      return;
     }
 
     //Get user from database
@@ -34,7 +35,7 @@ class AuthController {
                 //Sing JWT, valid for 1 hour
                 const token = jwt.sign({_id: user_data._id,email: user_data.email},config.jwtSecret,{expiresIn: "1h"});
                 //Send the jwt in the response
-                res.send(token);
+                successResponse('login successfull', token, res);
                 
             } else {
                 failureResponse('Khong tim thay user', {}, res)
