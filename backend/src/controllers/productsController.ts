@@ -1,8 +1,7 @@
 import { Request, Response } from 'express';
-import { insufficientParameters, mongoError, successResponse, failureResponse } from '../modules/common/service';
 import { IProduct } from '../modules/products/model';
 import ProductsService from '../modules/products/service';
-import {changeToSlug} from '../utils/utils'
+import { changeToSlug } from '../utils/utils';
 export class ProductsController {
 
     private productService: ProductsService = new ProductsService();
@@ -23,13 +22,20 @@ export class ProductsController {
             };
             this.productService.createProduct(product, (err: any, data: IProduct) => {
                 if (err) {
-                    mongoError(err, res);
+                    res.status(500).json({
+                        message: 'Lỗi hệ thống'
+                    });
                 } else {
-                    successResponse('create product successfull', data, res);
+                    res.status(200).json({
+                        message: 'Tạo mới sản phẩm thành công',
+                        data
+                    });
                 }
             });
         } else {
-            insufficientParameters(res);
+            res.status(400).json({
+                message: 'Name là bắt buộc'
+            });
         }
     }
 
@@ -39,7 +45,9 @@ export class ProductsController {
             const params = { _id: id };
             this.productService.findProduct(params, (err: any, product: IProduct) => {
                 if (err) {
-                    mongoError(err, res);
+                    res.status(500).json({
+                        message: 'Lỗi hệ thống'
+                    });
                 } else if (product) {
                     product.updateDate = new Date(Date.now());
 
@@ -56,17 +64,26 @@ export class ProductsController {
                     };
                     this.productService.updateProduct(ProductParams, (err: any) => {
                         if (err) {
-                            mongoError(err, res);
+                            res.status(500).json({
+                                message: 'Lỗi hệ thống'
+                            });
                         } else {
-                            successResponse('update successfull', ProductParams, res);
+                            res.status(500).json({
+                                message: 'Cập nhật sản phẩm thành công',
+                                ProductParams
+                            });
                         }
                     });
                 } else {
-                    failureResponse('invalid user', null, res);
+                    res.status(400).json({
+                        message: 'Không tìm thấy sản phẩm'
+                    });
                 }
             });
         } else {
-            insufficientParameters(res);
+            res.status(400).json({
+                message: 'Id là bắt buộc'
+            });
         }
     }
 
@@ -86,7 +103,9 @@ export class ProductsController {
             }
             res.status(200).json(dataResponse);
         } else {
-            insufficientParameters(res);
+            res.status(400).json({
+                message: 'Name là bắt buộc'
+            });
         }
     }
 
@@ -95,7 +114,9 @@ export class ProductsController {
     //     if (path) {
     //         this.fileImage_service.deleteFileImage(path, (err: any, delete_details) => {
     //             if (err) {
-    //                 mongoError(err, res);
+    //                 res.status(500).json({
+    //     message: 'Lỗi hệ thống'
+    // });
     //             } else if (delete_details.deletedCount !== 0) {
     //                 successResponse('delete successfull', null, res);
     //                 // remove file at uploads folder

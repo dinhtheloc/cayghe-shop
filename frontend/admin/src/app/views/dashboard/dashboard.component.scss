@@ -1,0 +1,13 @@
+.dropleft .dropdown-toggle:before, .dropdown-menu:before, .dropdown-menu.dropdown-black:after {
+    display: none !important;
+}
+
+.dropdown-left {
+    left: auto !important;
+    right: 0;
+}
+
+
+.table-settings label {
+    color: hsla(0,0%,100%,.6);
+}

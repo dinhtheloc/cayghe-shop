@@ -11,6 +11,9 @@ import { FooterComponent } from './components/footer/footer.component';
 import { LoginComponent } from './views/login/login.component';
 import { ErrorInterceptor } from './services/helper/error.interceptor';
 import { JwtInterceptor } from './services/helper/jwt.interceptor';
+import { DashboardComponent } from './views/dashboard/dashboard.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+
 
 @NgModule({
   declarations: [
@@ -19,13 +22,15 @@ import { JwtInterceptor } from './services/helper/jwt.interceptor';
     NavComponent,
     HeaderComponent,
     FooterComponent,
-    LoginComponent
+    LoginComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxPaginationModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

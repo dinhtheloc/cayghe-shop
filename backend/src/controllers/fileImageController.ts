@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
-import { insufficientParameters, mongoError, successResponse, failureResponse } from '../modules/common/service';
-import { IFileImage } from '../modules/fileImage/model';
 import * as fs from 'fs';
+import { IFileImage } from '../modules/fileImage/model';
 import FileImageService from '../modules/fileImage/service';
 
 export class FileImageController {
@@ -25,13 +24,21 @@ export class FileImageController {
             };
             this.fileImage_service.createFileImage(fileImage_params, (err: any, fileImage_data: IFileImage) => {
                 if (err) {
-                    mongoError(err, res);
+                    res.status(500).json({
+                        message: 'Lỗi hệ thống'
+                    });
                 } else {
-                    successResponse('upload file successfull', fileImage_data, res);
+                    res.status(200).json({
+                        message: 'Tải file thành công',
+                        data: fileImage_data
+                    });
                 }
             });
         } else {
-            insufficientParameters(res);
+            res.status(400).json({
+                message: 'File là bắt buộc',
+                data: {}
+            });
         }
     }
 
@@ -51,7 +58,10 @@ export class FileImageController {
             }
             res.status(200).json(dataResponse);
         } else {
-            insufficientParameters(res);
+            res.status(400).json({
+                message: 'pageIndex và pageSize là bắt buộc',
+                data: {}
+            });
         }
     }
 
@@ -60,20 +70,30 @@ export class FileImageController {
         if (path) {
             this.fileImage_service.deleteFileImage(path, (err: any, delete_details) => {
                 if (err) {
-                    mongoError(err, res);
+                    res.status(500).json({
+                        message: 'Lỗi hệ thống'
+                    });
                 } else if (delete_details.deletedCount !== 0) {
-                    successResponse('delete successfull', null, res);
+                    res.status(200).json({
+                        message: 'Xoá file thành công',
+                        data: {}
+                    });
                     // remove file at uploads folder
                     fs.unlink(path, (err) => {
                         if (err) throw err;
-                        console.log(`successfully deleted ${path}`);
                     });
                 } else {
-                    failureResponse('invalid', null, res);
+                    res.status(400).json({
+                        message: 'Lỗi hệ thống',
+                        data: {}
+                    });
                 }
             });
         } else {
-            insufficientParameters(res);
+            res.status(400).json({
+                message: 'Thiếu đường dẫn',
+                data: {}
+            });
         }
     }
 
