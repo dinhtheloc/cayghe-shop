@@ -1,189 +1,121 @@
 <div class="d-block mb-4">
-    <h4>Quản lý chung</h4>
-    <p class="mb-0">Liệt kê danh sách sản phẩm</p>
-  </div>
-  
-  
-  <div class="table-settings mb-4">
-    <div class="row align-items-end">
-      <div class="col col-md-4">
-  
-        <div class="form-group m-0">
-          <label for="nameProduct">Tên sản phẩm</label>
-          <input type="text" class="form-control" id="nameProduct" aria-describedby="nameProduct"
-            placeholder="Nhập tên sản phẩm">
-        </div>
-      </div>
-      <div class="col col-md-4">
-        <button class="btn btn-primary animation-on-hover m-0">
-          <span class="fas fa-search d-inline-block mr-2"></span>Tìm kiếm
-        </button>
-      </div>
-      <div class="col col-md-4 text-right">
-        <button class="btn btn-success animation-on-hover m-0 ">
-          <span class="fas fa-plus d-inline-block mr-2"></span>Thêm mới sản phẩm
-        </button>
+  <h4>Quản lý chung</h4>
+  <p class="mb-0">Liệt kê danh sách sản phẩm</p>
+</div>
+
+
+<div class="table-settings mb-4">
+  <div class="row align-items-end">
+    <div class="col col-md-4">
+
+      <div class="form-group m-0">
+        <label for="nameProduct">Tên sản phẩm</label>
+        <input type="text" class="form-control" id="nameProduct" aria-describedby="nameProduct"
+          placeholder="Nhập tên sản phẩm">
       </div>
     </div>
+    <div class="col col-md-4">
+      <button class="btn btn-primary animation-on-hover m-0">
+        <span class="fas fa-search d-inline-block mr-2"></span>Tìm kiếm
+      </button>
+    </div>
+    <div class="col col-md-4 text-right">
+      <button class="btn btn-success animation-on-hover m-0 ">
+        <span class="fas fa-plus d-inline-block mr-2"></span>Thêm mới sản phẩm
+      </button>
+    </div>
   </div>
-  
-  <div class="row">
-    <div class="col-md-12">
-      <div class="card">
-        <div class="card-header">
-          <div class="d-flex justify-content-between">
-            <h4 class="card-title">Danh sách sản phẩm</h4>
-            <div class="btn-group dropdown ">
-              <button class="btn btn-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false">
-                <span class="icon icon-sm icon-gray">
-                  <span class="fas fa-cog"></span>
-                </span>
-                <span class="sr-only">PageSize</span>
-              </button>
-              <div class="dropdown-menu dropdown-black dropdown-menu-lg-right dropdown-left">
-                <a class="dropdown-item d-flex font-weight-bold" href="#">
-                  10 <span class="icon icon-small ml-auto"><span class="fas fa-check"></span></span>
-                </a>
-                <a class="dropdown-item font-weight-bold" href="#">20</a>
-                <a class="dropdown-item font-weight-bold" href="#">30</a>
-              </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="d-flex justify-content-between">
+          <h4 class="card-title">Danh sách sản phẩm</h4>
+          <div class="btn-group dropdown align-self-center">
+            <button class="btn btn-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">
+              <span class="icon icon-sm icon-gray">
+                <span class="fas fa-cog"></span>
+              </span>
+              <span class="sr-only">PageSize</span>
+            </button>
+            <div class="dropdown-menu dropdown-black dropdown-menu-lg-right dropdown-left">
+              <a class="dropdown-item d-flex font-weight-bold" href="#">
+                10 <span class="icon icon-small ml-auto"><span class="fas fa-check"></span></span>
+              </a>
+              <a class="dropdown-item font-weight-bold" href="#">20</a>
+              <a class="dropdown-item font-weight-bold" href="#">30</a>
             </div>
           </div>
-  
-  
         </div>
-  
-        <div class="card-body">
-          <div class="table-responsive">
-            <table class="table" id="simple-table" role="grid">
-              <thead class=" text-primary">
-                <tr role="row" class="tablesorter-headerRow">
-                  <th>
-                    Name
-                  </th>
-                  <th>
-                    <div class="tablesorter-header-inner">
-                      Country
-                    </div>
-                  </th>
-                  <th>
-                    <div class="tablesorter-header-inner">
-                      City
-                    </div>
-                  </th>
-                  <th>
-                    <div class="tablesorter-header-inner">
-                      Salary
-                    </div>
-                  </th>
-                </tr>
-              </thead>
-              <tbody aria-live="polite" aria-relevant="all">
-                <tr role="row">
-                  <td>
-                    Dakota Rice
-                  </td>
-                  <td>
-                    Niger
-                  </td>
-                  <td>
-                    Oud-Turnhout
-                  </td>
-                  <td class="text-center">
-                    $36,738
-                  </td>
-                </tr>
-                <tr role="row">
-                  <td>
-                    Minerva Hooper
-                  </td>
-                  <td>
-                    Curaçao
-                  </td>
-                  <td>
-                    Sinaai-Waas
-                  </td>
-                  <td class="text-center">
-                    $23,789
-                  </td>
-                </tr>
-                <tr role="row">
-                  <td>
-                    Sage Rodriguez
-                  </td>
-                  <td>
-                    Netherlands
-                  </td>
-                  <td>
-                    Baileux
-                  </td>
-                  <td class="text-center">
-                    $56,142
-                  </td>
-                </tr>
-                <tr role="row">
-                  <td>
-                    Philip Chaney
-                  </td>
-                  <td>
-                    Korea, South
-                  </td>
-                  <td>
-                    Overland Park
-                  </td>
-                  <td class="text-center">
-                    $38,735
-                  </td>
-                </tr>
-                <tr role="row">
-                  <td>
-                    Doris Greene
-                  </td>
-                  <td>
-                    Malawi
-                  </td>
-                  <td>
-                    Feldkirchen in Kärnten
-                  </td>
-                  <td class="text-center">
-                    $63,542
-                  </td>
-                </tr>
-                <tr role="row">
-                  <td>
-                    Mason Porter
-                  </td>
-                  <td>
-                    Chile
-                  </td>
-                  <td>
-                    Gloucester
-                  </td>
-                  <td class="text-center">
-                    $78,615
-                  </td>
-                </tr>
-                <tr role="row">
-                  <td>
-                    Jon Porter
-                  </td>
-                  <td>
-                    Portugal
-                  </td>
-                  <td>
-                    Gloucester
-                  </td>
-                  <td class="text-center">
-                    $98,615
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
-          </div>
+
+
+      </div>
+
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table" id="simple-table" role="grid">
+            <thead class=" text-primary">
+              <tr role="row" class="tablesorter-headerRow">
+                <th>
+                  Name
+                </th>
+                <th>
+                  <div class="tablesorter-header-inner">
+                    Country
+                  </div>
+                </th>
+                <th>
+                  <div class="tablesorter-header-inner">
+                    City
+                  </div>
+                </th>
+                <th>
+                  <div class="tablesorter-header-inner">
+                    Salary
+                  </div>
+                </th>
+              </tr>
+            </thead>
+            <tbody aria-live="polite" aria-relevant="all">
+              <tr role="row" *ngFor="let item of collection.data | paginate: config">
+                <td>
+                  Dakota Rice
+                </td>
+                <td>
+                  Niger
+                </td>
+                <td>
+                  Oud-Turnhout
+                </td>
+                <td class="text-center">
+                  $36,738
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <pagination-template #p="paginationApi" maxSize="10" (pageChange)="pageChanged($event)">
+            <nav aria-label="pagination">
+              <ul class="pagination">
+                <li [class.disabled]="p.isFirstPage()" class="pagination-previous page-item">
+                  <a class="page-link" href="javascript://" (click)="p.previous()">Previous</a>
+                </li>
+                <li class="page-item" *ngFor="let page of p.pages" [class.active]="p.getCurrent() === page.value">
+                  <a (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value" class="page-link"
+                    href="javascript://">{{ page.label }}</a>
+                  <a *ngIf="p.getCurrent() === page.value" class="page-link" href="javascript://">{{ page.label }}</a>
+                </li>
+
+                <li class="page-item pagination-next" [class.disabled]="p.isLastPage()">
+                  <a class="page-link" (click)="p.next()" href="javascript://">Next</a>
+                </li>
+              </ul>
+            </nav>
+          </pagination-template>
         </div>
       </div>
     </div>
   </div>
-  
+</div>

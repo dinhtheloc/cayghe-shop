@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { PaginationControlsDirective } from 'ngx-pagination';
 
 @Component({
   selector: 'app-dashboard',
@@ -6,20 +7,32 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+  // tslint:disable-next-line:no-input-rename
+  @Input('paginationData') p: PaginationControlsDirective;
   config: any;
-  constructor() { 
+  collection = { count: 60, data: [] };
+  constructor() {
+    // Create dummy data
+    for (let i = 0; i < this.collection.count; i++) {
+      this.collection.data.push(
+        {
+          id: i + 1,
+          value: 'items number ' + (i + 1)
+        }
+      );
+    }
 
     this.config = {
       itemsPerPage: 5,
       currentPage: 1,
-      totalItems: 30
+      totalItems: this.collection.count
     };
   }
 
   ngOnInit(): void {
   }
 
-  pageChanged(event): void{
+  pageChanged(event): void {
     this.config.currentPage = event;
   }
 }
