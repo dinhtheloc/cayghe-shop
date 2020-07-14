@@ -1,2 +1,37 @@
 /* You can add global styles to this file, and also import other style files */
 @import '../node_modules/@fortawesome/fontawesome-free/css/all.css';
+@import './assets/css/black-dashboard.css';
+
+.table-responsive {
+    overflow: auto;
+}
+
+.dropleft .dropdown-toggle:before, .dropdown-menu:before, .dropdown-menu.dropdown-black:after {
+    display: none !important;
+}
+
+.dropdown-left {
+    left: auto !important;
+    right: 0 !important;
+}
+
+
+.table-settings label {
+    color: hsla(0,0%,100%,.6);
+}
+
+.btn-icon {
+    font-size: 25px !important;
+}
+
+.modal-black .close > span:not(.sr-only) {
+    background-color: transparent;
+    color: rgb(255, 255, 255);
+    line-height: 17px;
+    height: 1.25rem;
+    width: 1.25rem;
+    border-radius: 50%;
+    font-size: 1.25rem;
+    display: block;
+    transition: all 0.15s ease;
+}

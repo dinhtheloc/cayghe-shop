@@ -8,12 +8,14 @@ export class ProductsController {
     private changeToSlug = changeToSlug;
 
     public createProduct(req: Request, res: Response) {
-        const { name, alias, price, available, description, inventory } = req.body;
+        const { name, alias, price, available, arrayImage, description, inventory } = req.body;
         if (name) {
+
             const product: IProduct = {
                 name: name.trim(),
                 alias: alias || this.changeToSlug(name),
                 price: price || 0,
+                arrayImage: arrayImage || [],
                 inventory: inventory || 0,
                 description: description || '',
                 available: available || false,
@@ -40,7 +42,7 @@ export class ProductsController {
     }
 
     public updateProduct(req: Request, res: Response) {
-        const { id, name, price, available, description, inventory } = req.body;
+        const { id, name, price, available, description, arrayImage, inventory } = req.body;
         if (id) {
             const params = { _id: id };
             this.productService.findProduct(params, (err: any, product: IProduct) => {
@@ -57,6 +59,7 @@ export class ProductsController {
                         alias: name ? this.changeToSlug(name) : product.alias,
                         price: price || product.price,
                         inventory: inventory || product.inventory,
+                        arrayImage: arrayImage || product.arrayImage,
                         description: description || product.description,
                         available: available || product.available,
                         createDate: product.createDate,
@@ -88,9 +91,9 @@ export class ProductsController {
     }
 
     public async getProducts(req: Request, res: Response) {
-        const { pageIndex, pageSize } = req.body;
+        const { pageIndex, pageSize } = req.query;
         if (pageIndex && pageSize) {
-            const data = await this.productService.getProducts(pageSize, pageIndex);
+            const data = await this.productService.getProducts(Number(pageSize), Number(pageIndex));
             const num = await this.productService.getTotalProducts();
 
             const dataResponse = {
@@ -98,13 +101,13 @@ export class ProductsController {
                 pagination: {
                     pageIndex: pageIndex,
                     pageSize: pageSize,
-                    totalSizes: num
+                    totalSize: num
                 }
             }
             res.status(200).json(dataResponse);
         } else {
             res.status(400).json({
-                message: 'Name là bắt buộc'
+                message: 'pageIndex và pageSize là bắt buộc'
             });
         }
     }

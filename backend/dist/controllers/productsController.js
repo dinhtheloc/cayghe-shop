@@ -10,19 +10,20 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProductsController = void 0;
-const service_1 = require("../modules/common/service");
-const service_2 = require("../modules/products/service");
+const service_1 = require("../modules/products/service");
 const utils_1 = require("../utils/utils");
 class ProductsController {
     constructor() {
-        this.productService = new service_2.default();
+        this.productService = new service_1.default();
         this.changeToSlug = utils_1.changeToSlug;
         // public delete_fileImage(req: Request, res: Response) {
         //     const path = req.body.path;
         //     if (path) {
         //         this.fileImage_service.deleteFileImage(path, (err: any, delete_details) => {
         //             if (err) {
-        //                 mongoError(err, res);
+        //                 res.status(500).json({
+        //     message: 'Lỗi hệ thống'
+        // });
         //             } else if (delete_details.deletedCount !== 0) {
         //                 successResponse('delete successfull', null, res);
         //                 // remove file at uploads folder
@@ -40,12 +41,13 @@ class ProductsController {
         // }
     }
     createProduct(req, res) {
-        const { name, alias, price, available, description, inventory } = req.body;
+        const { name, alias, price, available, arrayImage, description, inventory } = req.body;
         if (name) {
             const product = {
                 name: name.trim(),
                 alias: alias || this.changeToSlug(name),
                 price: price || 0,
+                arrayImage: arrayImage || [],
                 inventory: inventory || 0,
                 description: description || '',
                 available: available || false,
@@ -54,24 +56,33 @@ class ProductsController {
             };
             this.productService.createProduct(product, (err, data) => {
                 if (err) {
-                    service_1.mongoError(err, res);
+                    res.status(500).json({
+                        message: 'Lỗi hệ thống'
+                    });
                 }
                 else {
-                    service_1.successResponse('create product successfull', data, res);
+                    res.status(200).json({
+                        message: 'Tạo mới sản phẩm thành công',
+                        data
+                    });
                 }
             });
         }
         else {
-            service_1.insufficientParameters(res);
+            res.status(400).json({
+                message: 'Name là bắt buộc'
+            });
         }
     }
     updateProduct(req, res) {
-        const { id, name, price, available, description, inventory } = req.body;
+        const { id, name, price, available, description, arrayImage, inventory } = req.body;
         if (id) {
             const params = { _id: id };
             this.productService.findProduct(params, (err, product) => {
                 if (err) {
-                    service_1.mongoError(err, res);
+                    res.status(500).json({
+                        message: 'Lỗi hệ thống'
+                    });
                 }
                 else if (product) {
                     product.updateDate = new Date(Date.now());
@@ -81,6 +92,7 @@ class ProductsController {
                         alias: name ? this.changeToSlug(name) : product.alias,
                         price: price || product.price,
                         inventory: inventory || product.inventory,
+                        arrayImage: arrayImage || product.arrayImage,
                         description: description || product.description,
                         available: available || product.available,
                         createDate: product.createDate,
@@ -88,40 +100,51 @@ class ProductsController {
                     };
                     this.productService.updateProduct(ProductParams, (err) => {
                         if (err) {
-                            service_1.mongoError(err, res);
+                            res.status(500).json({
+                                message: 'Lỗi hệ thống'
+                            });
                         }
                         else {
-                            service_1.successResponse('update successfull', ProductParams, res);
+                            res.status(500).json({
+                                message: 'Cập nhật sản phẩm thành công',
+                                ProductParams
+                            });
                         }
                     });
                 }
                 else {
-                    service_1.failureResponse('invalid user', null, res);
+                    res.status(400).json({
+                        message: 'Không tìm thấy sản phẩm'
+                    });
                 }
             });
         }
         else {
-            service_1.insufficientParameters(res);
+            res.status(400).json({
+                message: 'Id là bắt buộc'
+            });
         }
     }
     getProducts(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { pageIndex, pageSize } = req.body;
+            const { pageIndex, pageSize } = req.query;
             if (pageIndex && pageSize) {
-                const data = yield this.productService.getProducts(pageSize, pageIndex);
+                const data = yield this.productService.getProducts(Number(pageSize), Number(pageIndex));
                 const num = yield this.productService.getTotalProducts();
                 const dataResponse = {
                     data: data,
                     pagination: {
                         pageIndex: pageIndex,
                         pageSize: pageSize,
-                        totalSizes: num
+                        totalSize: num
                     }
                 };
                 res.status(200).json(dataResponse);
             }
             else {
-                service_1.insufficientParameters(res);
+                res.status(400).json({
+                    message: 'pageIndex và pageSize là bắt buộc'
+                });
             }
         });
     }

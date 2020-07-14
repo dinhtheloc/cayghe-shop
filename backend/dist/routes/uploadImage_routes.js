@@ -22,7 +22,7 @@ class UploadsRoutes {
         app.post('/api/uploadImage', this.upload.single('image'), (req, res) => __awaiter(this, void 0, void 0, function* () {
             this.fileImage_controller.create_fileImage(req, res);
         }));
-        app.get('/api/getImage', (req, res) => {
+        app.get('/api/getImages', (req, res) => {
             this.fileImage_controller.getFileImage(req, res);
         });
         app.delete('/api/deleteImage', (req, res) => {

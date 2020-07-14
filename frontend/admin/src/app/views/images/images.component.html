@@ -1,0 +1,202 @@
+<div class="d-block mb-4">
+    <h4>Quản lý hình ảnh</h4>
+    <p class="mb-0">Liệt kê tất cả hình ảnh sản phẩm</p>
+</div>
+
+
+<div class="table-settings mb-4">
+    <div class="row align-items-end">
+        <div class="col col-md-4">
+
+            <div class="form-group m-0">
+                <label for="nameProduct">Tên hình ảnh</label>
+                <input type="text" class="form-control" id="nameProduct" aria-describedby="nameProduct"
+                    placeholder="Nhập tên hình ảnh">
+            </div>
+        </div>
+        <div class="col col-md-4">
+            <button class="btn btn-primary animation-on-hover m-0">
+                <span class="fas fa-search d-inline-block mr-2"></span>Tìm kiếm
+            </button>
+        </div>
+        <div class="col col-md-4 text-right">
+            <button class="btn btn-success animation-on-hover m-0" (click)="openCreatePopup()">
+                <span class="fas fa-plus d-inline-block mr-2"></span>Thêm mới sản phẩm
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="d-flex justify-content-between">
+                    <h4 class="card-title">Danh sách hình ảnh</h4>
+                    <div class="btn-group dropdown align-self-center">
+                        <button class="btn btn-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            <span class="icon icon-sm icon-gray">
+                                <span class="fas fa-cog"></span>
+                            </span>
+                            <span class="sr-only">PageSize</span>
+                        </button>
+                        <div class="dropdown-menu dropdown-black dropdown-menu-lg-right dropdown-left">
+                            <a class="dropdown-item d-flex font-weight-bold" (click)="pageSize = 10"
+                                href="javascript://">
+                                10 <span *ngIf="pageSize === 10" class="icon icon-small ml-auto"><span
+                                        class="fas fa-check"></span></span>
+                            </a>
+                            <a class="dropdown-item d-flex font-weight-bold" (click)="pageSize = 20"
+                                href="javascript://">20 <span *ngIf="pageSize === 20"
+                                    class="icon icon-small ml-auto"><span class="fas fa-check"></span></span></a>
+                            <a class="dropdown-item d-flex font-weight-bold" (click)="pageSize = 30"
+                                href="javascript://">30 <span *ngIf="pageSize === 30"
+                                    class="icon icon-small ml-auto"><span class="fas fa-check"></span></span></a>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table" id="simple-table" role="grid">
+                        <thead class=" text-primary">
+                            <tr role="row" class="tablesorter-headerRow">
+                                <th>
+                                    STT
+                                </th>
+                                <th>
+                                    Id
+                                </th>
+                                <th>
+                                    Image
+                                </th>
+                                <th>
+                                    Tên hình
+                                </th>
+                                <th>
+                                    Ngày tạo
+                                </th>
+                                <th>
+                                    Thao tác
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody aria-live="polite" aria-relevant="all">
+                            <tr role="row" *ngFor="let item of data | paginate: config; let index = index">
+                                <td>
+                                    {{ (index+1) + (pageIndex - 1) * pageSize }}
+                                </td>
+                                <td>
+                                    {{item._id}}
+                                </td>
+                                <td>
+
+                                    <img src="{{urlApi + '/' +item.path}}" alt="contact-img" title="contact-img"
+                                        class="rounded mr-3" height="64">
+                                </td>
+                                <td>
+                                    {{item.name}}
+                                </td>
+                                <td>
+                                    {{item.createDate}}
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-success btn-link btn-icon">
+                                        <i class="fas fa-pen-square"></i>
+                                    </button>
+                                    <button type="button" rel="tooltip" class="btn btn-danger btn-link btn-icon"
+                                        data-original-title="Delete" title=""
+                                        (click)="openConfirm(item.path, item.name)">
+                                        <i class="fas fa-backspace"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr *ngIf="!data || data.length == 0">
+                                <td colspan="100%" class="text-center">Không có dữ liệu</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <pagination-template #p="paginationApi" maxSize="10" (pageChange)="pageChanged($event)">
+                        <nav aria-label="pagination">
+                            <ul class="pagination">
+                                <li [class.disabled]="p.isFirstPage()" class="pagination-previous page-item">
+                                    <a class="page-link" href="javascript://" (click)="p.previous()">Previous</a>
+                                </li>
+                                <li class="page-item" *ngFor="let page of p.pages"
+                                    [class.active]="p.getCurrent() === page.value">
+                                    <a (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value"
+                                        class="page-link" href="javascript://">{{ page.label }}</a>
+                                    <a *ngIf="p.getCurrent() === page.value" class="page-link"
+                                        href="javascript://">{{ page.label }}</a>
+                                </li>
+
+                                <li class="page-item pagination-next" [class.disabled]="p.isLastPage()">
+                                    <a class="page-link" (click)="p.next()" href="javascript://">Next</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </pagination-template>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal confirm delete -->
+<div class="modal modal-black fade" id="createModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Upload hình ảnh</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="fileinput fileinput-new d-block text-center" data-provides="fileinput">
+                    <div class="fileinput-new thumbnail">
+                        <img src="https://demos.creative-tim.com/marketplace/black-dashboard-pro/assets/img/image_placeholder.jpg" alt="...">
+                    </div>
+                    <div class="fileinput-preview fileinput-exists thumbnail" ></div>
+                    <div>
+                        <span class="btn btn-rose btn-round btn-file">
+                            <span class="fileinput-new">Select image</span>
+                            <span class="fileinput-exists">Change</span>
+                            <input type="hidden"><input type="file" />
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Bỏ qua</button>
+                <button type="button" class="btn btn-primary" (click)="create()">Upload hình ảnh</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal confirm delete -->
+<div class="modal modal-black fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Thông báo xóa hình ảnh</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="text-center">Bạn có chắc chắn muốn xóa hình ảnh {{ imageName }} ?</p>
+                <img class="image-confirm" src="{{imageUrl}}" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Bỏ qua</button>
+                <button type="button" class="btn btn-primary" (click)="delete(path)">Xóa</button>
+            </div>
+        </div>
+    </div>
+</div>

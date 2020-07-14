@@ -43,9 +43,9 @@ export class FileImageController {
     }
 
     public async getFileImage(req: Request, res: Response) {
-        const { pageIndex, pageSize } = req.body;
+        const { pageIndex, pageSize } = req.query;
         if (pageIndex && pageSize) {
-            const data = await this.fileImage_service.getFileImage(pageSize, pageIndex);
+            const data = await this.fileImage_service.getFileImage(Number(pageSize), Number(pageIndex));
             const num = await this.fileImage_service.getNumOfFileImage();
 
             const dataResponse = {
@@ -53,7 +53,7 @@ export class FileImageController {
                 pagination: {
                     pageIndex: pageIndex,
                     pageSize: pageSize,
-                    totalSizes: num
+                    totalSize: num
                 }
             }
             res.status(200).json(dataResponse);
@@ -80,10 +80,12 @@ export class FileImageController {
                     });
                     // remove file at uploads folder
                     fs.unlink(path, (err) => {
-                        if (err) throw err;
+                        res.status(500).json({
+                            message: 'Lỗi hệ thống'
+                        });
                     });
                 } else {
-                    res.status(400).json({
+                    res.status(500).json({
                         message: 'Lỗi hệ thống',
                         data: {}
                     });

@@ -3,6 +3,7 @@ export interface IProduct {
     name: String;
     alias: String;
     price: Number;
+    arrayImage: Array<any>;
     inventory: Number;
     description: String;
     available: Boolean;

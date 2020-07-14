@@ -11,9 +11,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const jwt = require("jsonwebtoken");
 const configJWT_1 = require("../config/configJWT");
-const utils_1 = require("../utils/utils");
 const service_1 = require("../modules/users/service");
-const service_2 = require("../modules/common/service");
+const utils_1 = require("../utils/utils");
 class AuthController {
     constructor() {
         this.userService = new service_1.default();
@@ -21,7 +20,10 @@ class AuthController {
             //Check if username and password are set
             let { email, password } = req.body;
             if (!(email && password)) {
-                res.status(400).send();
+                res.status(400).json({
+                    message: 'Email và Password là bắt buộc',
+                    data: {}
+                });
                 return;
             }
             //Get user from database
@@ -30,22 +32,35 @@ class AuthController {
             };
             this.userService.filterUser(query, (err, user_data) => {
                 if (err) {
-                    service_2.mongoError(err, res);
+                    res.status(500).json({
+                        message: 'Lỗi hệ thống'
+                    });
                 }
                 else {
                     if (user_data) {
                         //Check if encrypted password match
                         if (utils_1.checkIfUnencryptedPasswordIsValid(user_data.password, password)) {
-                            res.status(401).send();
+                            res.status(401).json({
+                                message: 'Tài khoản và mật khẩu không đúng',
+                                data: {}
+                            });
                             return;
                         }
                         //Sing JWT, valid for 1 hour
                         const token = jwt.sign({ _id: user_data._id, email: user_data.email }, configJWT_1.default.jwtSecret, { expiresIn: "1h" });
                         //Send the jwt in the response
-                        service_2.successResponse('login successfull', token, res);
+                        res.status(200).json({
+                            message: 'Đăng nhập thành công',
+                            data: {
+                                token: token
+                            }
+                        });
                     }
                     else {
-                        service_2.failureResponse('Khong tim thay user', {}, res);
+                        res.status(401).json({
+                            message: 'Tài khoản và mật khẩu không đúng',
+                            data: {}
+                        });
                     }
                 }
             });

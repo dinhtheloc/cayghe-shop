@@ -13,6 +13,7 @@ import { ErrorInterceptor } from './services/helper/error.interceptor';
 import { JwtInterceptor } from './services/helper/jwt.interceptor';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ImagesComponent } from './views/images/images.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     HeaderComponent,
     FooterComponent,
     LoginComponent,
-    DashboardComponent
+    DashboardComponent,
+    ImagesComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +36,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }],
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

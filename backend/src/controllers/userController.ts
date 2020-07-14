@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-import { insufficientParameters, mongoError, successResponse, failureResponse } from '../modules/common/service';
 import { IUser } from '../modules/users/model';
 import UserService from '../modules/users/service';
 import * as bcrypt from "bcryptjs";
@@ -8,50 +7,50 @@ export class UserController {
 
     private user_service: UserService = new UserService();
 
-    public create_user(req: Request, res: Response) {
-        const {email,password,phoneNumber,role,gender,firstName,lastName} = req.body;
-        // this check whether all the filds were send through the erquest or not
-        if (email && password) {
-            const userParams: IUser = {
-                name: {
-                    firstName: firstName || '',
-                    lastName: lastName || ''
-                },
-                email: email,
-                password: bcrypt.hashSync(password, 8),
-                phoneNumber: phoneNumber || '',
-                role: role || '',
-                gender: gender || '',
-                createDate: new Date(),
-                updateDate: new Date()
-            };
-            this.user_service.createUser(userParams, (err: any, user_data: IUser) => {
-                if (err) {
-                    mongoError(err, res);
-                } else {
-                    successResponse('create user successfull', user_data, res);
-                }
-            });
-        } else {
-            // error response if some fields are missing in request body
-            insufficientParameters(res);
-        }
-    }
+    // public create_user(req: Request, res: Response) {
+    //     const {email,password,phoneNumber,role,gender,firstName,lastName} = req.body;
+    //     // this check whether all the filds were send through the erquest or not
+    //     if (email && password) {
+    //         const userParams: IUser = {
+    //             name: {
+    //                 firstName: firstName || '',
+    //                 lastName: lastName || ''
+    //             },
+    //             email: email,
+    //             password: bcrypt.hashSync(password, 8),
+    //             phoneNumber: phoneNumber || '',
+    //             role: role || '',
+    //             gender: gender || '',
+    //             createDate: new Date(),
+    //             updateDate: new Date()
+    //         };
+    //         this.user_service.createUser(userParams, (err: any, user_data: IUser) => {
+    //             if (err) {
+    //                 mongoError(err, res);
+    //             } else {
+    //                 successResponse('create user successfull', user_data, res);
+    //             }
+    //         });
+    //     } else {
+    //         // error response if some fields are missing in request body
+    //         insufficientParameters(res);
+    //     }
+    // }
 
-    public get_user(req: Request, res: Response) {
-        if (req.params.id) {
-            const user_filter = { _id: req.params.id };
-            this.user_service.filterUser(user_filter, (err: any, user_data: IUser) => {
-                if (err) {
-                    mongoError(err, res);
-                } else {
-                    successResponse('get user successfull', user_data, res);
-                }
-            });
-        } else {
-            insufficientParameters(res);
-        }
-    }
+    // public get_user(req: Request, res: Response) {
+    //     if (req.params.id) {
+    //         const user_filter = { _id: req.params.id };
+    //         this.user_service.filterUser(user_filter, (err: any, user_data: IUser) => {
+    //             if (err) {
+    //                 mongoError(err, res);
+    //             } else {
+    //                 successResponse('get user successfull', user_data, res);
+    //             }
+    //         });
+    //     } else {
+    //         insufficientParameters(res);
+    //     }
+    // }
     
 
     // public update_user(req: Request, res: Response) {
@@ -99,19 +98,19 @@ export class UserController {
     //     }
     // }
 
-    public delete_user(req: Request, res: Response) {
-        if (req.params.id) {
-            this.user_service.deleteUser(req.params.id, (err: any, delete_details) => {
-                if (err) {
-                    mongoError(err, res);
-                } else if (delete_details.deletedCount !== 0) {
-                    successResponse('delete user successfull', null, res);
-                } else {
-                    failureResponse('invalid user', null, res);
-                }
-            });
-        } else {
-            insufficientParameters(res);
-        }
-    }
+    // public delete_user(req: Request, res: Response) {
+    //     if (req.params.id) {
+    //         this.user_service.deleteUser(req.params.id, (err: any, delete_details) => {
+    //             if (err) {
+    //                 mongoError(err, res);
+    //             } else if (delete_details.deletedCount !== 0) {
+    //                 successResponse('delete user successfull', null, res);
+    //             } else {
+    //                 failureResponse('invalid user', null, res);
+    //             }
+    //         });
+    //     } else {
+    //         insufficientParameters(res);
+    //     }
+    // }
 }

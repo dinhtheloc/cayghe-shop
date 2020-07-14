@@ -7,21 +7,21 @@ export class UsersRoutes {
 
     public route(app: Application) {
         
-        app.post('/api/createUser', (req: Request, res: Response) => {
-            this.user_controller.create_user(req, res);
-        });
+        // app.post('/api/createUser', (req: Request, res: Response) => {
+        //     this.user_controller.create_user(req, res);
+        // });
 
-        app.get('/api/user/:id', (req: Request, res: Response) => {
-            this.user_controller.get_user(req, res);
-        });
+        // app.get('/api/user/:id', (req: Request, res: Response) => {
+        //     this.user_controller.get_user(req, res);
+        // });
 
         // app.put('/api/user/:id', (req: Request, res: Response) => {
         //     this.user_controller.update_user(req, res);
         // });
 
-        app.delete('/api/user/:id', (req: Request, res: Response) => {
-            this.user_controller.delete_user(req, res);
-        });
+        // app.delete('/api/user/:id', (req: Request, res: Response) => {
+        //     this.user_controller.delete_user(req, res);
+        // });
 
     }
 }

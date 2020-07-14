@@ -10,9 +10,11 @@ export class ProductRoutes {
             this.productsController.createProduct(req, res);
         });
 
-        app.get('/api/getProducts', [checkJwt] , (req: Request, res: Response) => {
+        app.get('/api/getProducts', (req: Request, res: Response) => {
             this.productsController.getProducts(req, res);
         });
+
+        // [checkJwt]
 
         app.put('/api/updateProduct', (req: Request, res: Response) => {
             this.productsController.updateProduct(req, res);

@@ -15,7 +15,7 @@ export class UploadsRoutes {
             this.fileImage_controller.create_fileImage(req, res);
         });
 
-        app.get('/api/getImage', (req: Request, res: Response) => {
+        app.get('/api/getImages', (req: Request, res: Response) => {
             this.fileImage_controller.getFileImage(req, res);
         });
 
