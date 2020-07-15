@@ -6,7 +6,7 @@ import { checkJwt } from "../middlewares/checkJwt";
 export class ProductRoutes {
     private productsController = new ProductsController();
     public route(app: Application) {
-        app.post('/api/createProduct', (req: Request, res: Response) => {
+        app.post('/api/createProduct', [checkJwt], (req: Request, res: Response) => {
             this.productsController.createProduct(req, res);
         });
 
@@ -16,7 +16,7 @@ export class ProductRoutes {
 
         // [checkJwt]
 
-        app.put('/api/updateProduct', (req: Request, res: Response) => {
+        app.put('/api/updateProduct', [checkJwt], (req: Request, res: Response) => {
             this.productsController.updateProduct(req, res);
         });
 

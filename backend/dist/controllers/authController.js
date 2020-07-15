@@ -38,26 +38,29 @@ class AuthController {
                 }
                 else {
                     if (user_data) {
-                        //Check if encrypted password match
-                        if (utils_1.checkIfUnencryptedPasswordIsValid(user_data.password, password)) {
-                            res.status(401).json({
+                        // Check if encrypted password match
+                        const isValidPassword = utils_1.checkIfUnencryptedPasswordIsValid(password, user_data.password);
+                        if (isValidPassword) {
+                            //Sing JWT, valid for 1 hour
+                            const token = jwt.sign({ _id: user_data._id, email: user_data.email }, configJWT_1.default.jwtSecret, { expiresIn: "1h" });
+                            //Send the jwt in the response
+                            res.status(200).json({
+                                message: 'Đăng nhập thành công',
+                                data: {
+                                    token: token,
+                                    email: user_data.email
+                                }
+                            });
+                        }
+                        else {
+                            res.status(400).json({
                                 message: 'Tài khoản và mật khẩu không đúng',
                                 data: {}
                             });
-                            return;
                         }
-                        //Sing JWT, valid for 1 hour
-                        const token = jwt.sign({ _id: user_data._id, email: user_data.email }, configJWT_1.default.jwtSecret, { expiresIn: "1h" });
-                        //Send the jwt in the response
-                        res.status(200).json({
-                            message: 'Đăng nhập thành công',
-                            data: {
-                                token: token
-                            }
-                        });
                     }
                     else {
-                        res.status(401).json({
+                        res.status(400).json({
                             message: 'Tài khoản và mật khẩu không đúng',
                             data: {}
                         });

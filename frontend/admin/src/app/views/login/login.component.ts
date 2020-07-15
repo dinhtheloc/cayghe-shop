@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { AuthenticationService } from '../../services/auth/authentication.service';
+import { NotificationService } from '../../services/share/notification.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -13,7 +14,6 @@ export class LoginComponent implements OnInit {
   submitted = false;
   isFocusEmail = false;
   isFocusPassword = false;
-  error = '';
   loginForm = new FormGroup({
     email: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required)
@@ -23,7 +23,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private notificationService: NotificationService
   ) {
     // redirect to home if already logged in
     if (this.authenticationService.isLogin()) {
@@ -51,10 +52,12 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
+          this.notificationService.showNotificationSuccess('Đăng nhập thành công');
           this.router.navigate([this.returnUrl]);
         },
         error => {
-          this.error = error;
+
+          this.notificationService.showNotificationDanger(error);
           this.loading = false;
         });
   }

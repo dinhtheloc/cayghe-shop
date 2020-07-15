@@ -1,7 +1,7 @@
-<div class="wrapper">
+<div class="wrapper" [ngClass]="{'nav-open': isShowMenu, 'sidebar-mini': isShowMenu}">
   <app-nav></app-nav>
   <div class="main-panel ps ps--active-y">
-    <app-header></app-header>
+    <app-header (onToggleMenu)="onToggleMenu($event)"></app-header>
     <div class="content">
       <router-outlet></router-outlet>
     </div>

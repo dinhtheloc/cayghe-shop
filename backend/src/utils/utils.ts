@@ -37,8 +37,8 @@ const changeToSlug = (name: string) => {
     return slug;
 };
 
-const checkIfUnencryptedPasswordIsValid = (unencryptedPassword, password) => {
-    return bcrypt.compareSync(unencryptedPassword, password);
+const checkIfUnencryptedPasswordIsValid = (unencryptedPassword, hash) => {
+    return bcrypt.compareSync(unencryptedPassword, hash);
 }
 
 

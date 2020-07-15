@@ -4,7 +4,7 @@ import config from "../config/configJWT";
 import { IUser } from "../modules/users/model";
 import UserService from "../modules/users/service";
 import { checkIfUnencryptedPasswordIsValid } from "../utils/utils";
-
+import * as bcrypt from "bcryptjs";
 class AuthController {
 
     private userService: UserService = new UserService();
@@ -24,6 +24,7 @@ class AuthController {
         const query = {
             email: email
         };
+
         this.userService.filterUser(query, (err: any, user_data: IUser) => {
             if (err) {
                 res.status(500).json({
@@ -31,25 +32,28 @@ class AuthController {
                 });
             } else {
                 if (user_data) {
-                    //Check if encrypted password match
-                    if (checkIfUnencryptedPasswordIsValid(user_data.password, password)) {
-                        res.status(401).json({
+                    // Check if encrypted password match
+                    const isValidPassword = checkIfUnencryptedPasswordIsValid(password, user_data.password);
+                    if (isValidPassword) {
+                        //Sing JWT, valid for 1 hour
+                        const token = jwt.sign({ _id: user_data._id, email: user_data.email }, config.jwtSecret, { expiresIn: "1h" });
+                        //Send the jwt in the response
+                        res.status(200).json({
+                            message: 'Đăng nhập thành công',
+                            data: {
+                                token: token, 
+                                email: user_data.email
+                            }
+                        });
+                    } else {
+                        res.status(400).json({
                             message: 'Tài khoản và mật khẩu không đúng',
                             data: {}
                         });
-                        return;
                     }
-                    //Sing JWT, valid for 1 hour
-                    const token = jwt.sign({ _id: user_data._id, email: user_data.email }, config.jwtSecret, { expiresIn: "1h" });
-                    //Send the jwt in the response
-                    res.status(200).json({
-                        message: 'Đăng nhập thành công',
-                        data: {
-                            token: token
-                        }
-                    });
+
                 } else {
-                    res.status(401).json({
+                    res.status(400).json({
                         message: 'Tài khoản và mật khẩu không đúng',
                         data: {}
                     });

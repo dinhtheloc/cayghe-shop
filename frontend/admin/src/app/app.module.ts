@@ -14,8 +14,6 @@ import { JwtInterceptor } from './services/helper/jwt.interceptor';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ImagesComponent } from './views/images/images.component';
-
-
 @NgModule({
   declarations: [
     AppComponent,

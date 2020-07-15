@@ -6,16 +6,18 @@ class UserController {
     constructor() {
         this.user_service = new service_1.default();
         // public create_user(req: Request, res: Response) {
-        //     const {email,password,phoneNumber,role,gender,firstName,lastName} = req.body;
+        //     const {email, password, phoneNumber, role, gender, firstName, lastName} = req.body;
         //     // this check whether all the filds were send through the erquest or not
         //     if (email && password) {
+        //         const salt = bcrypt.genSaltSync(10);
+        //         const hash = bcrypt.hashSync(password, salt);
         //         const userParams: IUser = {
         //             name: {
         //                 firstName: firstName || '',
         //                 lastName: lastName || ''
         //             },
         //             email: email,
-        //             password: bcrypt.hashSync(password, 8),
+        //             password: hash,
         //             phoneNumber: phoneNumber || '',
         //             role: role || '',
         //             gender: gender || '',

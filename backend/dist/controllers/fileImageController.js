@@ -91,9 +91,13 @@ class FileImageController {
                     });
                     // remove file at uploads folder
                     fs.unlink(path, (err) => {
-                        res.status(500).json({
-                            message: 'Lỗi hệ thống'
-                        });
+                        console.log(err);
+                        if (err) {
+                            res.status(500).json({
+                                message: 'Lỗi hệ thống'
+                            });
+                        }
+                        console.log(`successfully deleted ${path}`);
                     });
                 }
                 else {

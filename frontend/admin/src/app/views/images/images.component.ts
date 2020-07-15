@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ImagesService } from '../../services/api/images.service';
 import { environment } from '../../../environments/environment';
+import {NotificationService} from '../../services/share/notification.service';
+import { from } from 'rxjs';
 declare var $: any;
 @Component({
   selector: 'app-images',
@@ -16,7 +18,10 @@ export class ImagesComponent implements OnInit {
   imageUrl;
   imageName;
   path;
-  constructor(private imagesService: ImagesService) {
+  fileUpload: any = 'assets/images/image_placeholder.jpg';
+  file: any;
+  constructor(
+    private imagesService: ImagesService, private notificationService: NotificationService) {
     this.config = {
       itemsPerPage: this.pageSize,
       currentPage: this.pageIndex,
@@ -56,7 +61,9 @@ export class ImagesComponent implements OnInit {
       path
     };
     this.imagesService.deleteImage(params).subscribe((data: any) => {
+      this.notificationService.showNotificationSuccess('Xoá hình ảnh thành công!');
       this.search();
+      $('#confirmDeleteModal').modal('hide');
     });
   }
 
@@ -66,12 +73,32 @@ export class ImagesComponent implements OnInit {
   }
 
   openCreatePopup(): void {
-
+    this.file = null;
+    this.fileUpload = 'assets/images/image_placeholder.jpg';
     $('#createModal').modal('show');
   }
 
   create(): void {
-    console.log('123');
+    if (this.file) {
+      this.imagesService.upload(this.file).subscribe((data: any) => {
+        this.search();
+        this.notificationService.showNotificationSuccess('Upload hình ảnh thành công!');
+        $('#createModal').modal('hide');
+      });
+    }
+  }
+
+  onSelectFile(event): void { // called each time file input changes
+    if (event.target.files && event.target.files[0]) {
+
+      this.file = event.target.files[0];
+      const reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]); // read file as data url
+      // tslint:disable-next-line: no-shadowed-variable
+      reader.onload = (event: any) => { // called once readAsDataURL is completed
+        this.fileUpload = event.target.result;
+      };
+    }
   }
 
 }

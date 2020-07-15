@@ -15,7 +15,7 @@
             </div>
         </div>
         <div class="col col-md-4">
-            <button class="btn btn-primary animation-on-hover m-0">
+            <button (click)="search()" class="btn btn-primary animation-on-hover m-0">
                 <span class="fas fa-search d-inline-block mr-2"></span>Tìm kiếm
             </button>
         </div>
@@ -159,14 +159,14 @@
             <div class="modal-body">
                 <div class="fileinput fileinput-new d-block text-center" data-provides="fileinput">
                     <div class="fileinput-new thumbnail">
-                        <img src="https://demos.creative-tim.com/marketplace/black-dashboard-pro/assets/img/image_placeholder.jpg" alt="...">
+                        <img [src]="fileUpload" alt="...">
                     </div>
                     <div class="fileinput-preview fileinput-exists thumbnail" ></div>
                     <div>
                         <span class="btn btn-rose btn-round btn-file">
                             <span class="fileinput-new">Select image</span>
                             <span class="fileinput-exists">Change</span>
-                            <input type="hidden"><input type="file" />
+                            <input type="hidden"><input id="file" type="file" (change)="onSelectFile($event)" />
                         </span>
                     </div>
                 </div>

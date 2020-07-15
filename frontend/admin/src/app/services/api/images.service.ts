@@ -14,10 +14,8 @@ export class ImagesService {
   getall(data: any): Observable<any[]> {
     const { pageSize, pageIndex } = data;
     const query = {
-      // tslint:disable-next-line: object-literal-key-quotes
-      'pageSize': pageSize,
-      // tslint:disable-next-line: object-literal-key-quotes
-      'pageIndex': pageIndex
+      pageSize,
+      pageIndex
     };
     return this.http.get<any[]>(`${this.imagesUrl}/getImages`, { params: query })
       .pipe(
@@ -25,12 +23,20 @@ export class ImagesService {
       );
   }
 
-  deleteImage(data: any): Observable<any[]> {
+  upload(file: File): Observable<any> {
+    const formData: FormData = new FormData();
+    formData.append('image', file);
+    return this.http.post(`${this.imagesUrl}/uploadImage`, formData).pipe(
+      catchError(this.handleError<any[]>('uploadImage', []))
+    );
+  }
+
+  deleteImage(data: any): Observable<any> {
     const { path } = data;
 
     const options = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       }),
       body: {
         path

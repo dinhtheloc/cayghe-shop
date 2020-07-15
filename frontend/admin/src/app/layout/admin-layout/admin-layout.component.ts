@@ -8,8 +8,14 @@ import { Component, OnInit } from '@angular/core';
 export class AdminLayoutComponent implements OnInit {
 
   constructor() { }
+  isShowMenu = false;
+  ngOnInit(): void {
 
-  ngOnInit() {
+  }
+
+  onToggleMenu(event: boolean): void {
+    this.isShowMenu = event;
+    console.log('event', event);
   }
 
 }
