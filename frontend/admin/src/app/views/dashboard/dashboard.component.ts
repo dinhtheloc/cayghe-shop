@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { PaginationControlsDirective } from 'ngx-pagination';
-
 import { ProductsService } from '../../services/api/products.service';
-
+import {NotificationService} from '../../services/share/notification.service';
+declare var $: any;
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -12,38 +12,62 @@ export class DashboardComponent implements OnInit {
   // tslint:disable-next-line:no-input-rename
   @Input('paginationData') p: PaginationControlsDirective;
   config: any;
-  collection = { count: 60, data: [] };
-  constructor(private productsService: ProductsService) {
-    // Create dummy data
-    for (let i = 0; i < this.collection.count; i++) {
-      this.collection.data.push(
-        {
-          id: i + 1,
-          value: 'items number ' + (i + 1)
-        }
-      );
-    }
-
+  pageSize = 10;
+  pageIndex = 1;
+  data: any = [];
+  idDelete;
+  nameDelete;
+  constructor(private productsService: ProductsService, private notificationService: NotificationService) {
     this.config = {
-      itemsPerPage: 5,
-      currentPage: 1,
-      totalItems: this.collection.count
+      itemsPerPage: this.pageSize,
+      currentPage: this.pageIndex,
+      totalItems: 0
     };
   }
 
   ngOnInit(): void {
-    this.getProducts();
+    this.search();
   }
 
-  getProducts(): void {
+
+  search(): void {
     const params = {
-      pageIndex: 1,
-      pageSize: 30
+      pageIndex: this.pageIndex,
+      pageSize: this.pageSize
     };
-    this.productsService.getall(params).subscribe(data => console.log(data));
+    this.productsService.getall(params).subscribe((data: any) => {
+      console.log(data);
+      this.data = data.data || [];
+      this.config = {
+        itemsPerPage: this.pageSize,
+        currentPage: this.pageIndex,
+        totalItems: data.pagination?.totalSize || 0
+      };
+    });
+  }
+
+  openConfirm(id, name): void {
+    this.idDelete = id;
+    this.nameDelete = name;
+    $('#confirmDeleteModal').modal('show');
   }
 
   pageChanged(event): void {
     this.config.currentPage = event;
+  }
+
+  delete(): void {
+    this.productsService.deleteProduct(this.idDelete).subscribe((data: any) => {
+      this.notificationService.showNotificationSuccess('Xoá sản phẩm thành công!');
+      this.search();
+      $('#confirmDeleteModal').modal('hide');
+    });
+  }
+  openCreatePopup(): void {
+    $('#createModal').modal('show');
+  }
+
+  create(): void {
+
   }
 }

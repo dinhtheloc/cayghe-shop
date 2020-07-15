@@ -20,7 +20,7 @@ exports.checkJwt = (req, res, next) => {
     }
     const { _id, email } = jwtPayload;
     const newToken = jwt.sign({ _id: _id._id, email: email }, configJWT_1.default.jwtSecret, {
-        expiresIn: "1h"
+        expiresIn: "4h"
     });
     res.setHeader("token", newToken);
     // Call the next middleware or controller

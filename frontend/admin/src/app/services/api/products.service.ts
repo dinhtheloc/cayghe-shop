@@ -32,6 +32,23 @@ export class ProductsService {
       );
   }
 
+  deleteProduct(_id: any): Observable<any[]> {
+
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      }),
+      body: {
+        _id
+      }
+    };
+    return this.http.delete<any[]>(`${this.productsUrl}/deleteProduct`, options)
+      .pipe(
+        catchError(this.handleError<any[]>('', []))
+      );
+  }
+
+
   /** GET hero by id. Return `undefined` when id not found */
   // getHeroNo404<Data>(id: number): Observable<Hero> {
   //   const url = `${this.heroesUrl}/?id=${id}`;

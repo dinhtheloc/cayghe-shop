@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-
 import { AuthenticationService } from '../../services/auth/authentication.service';
+
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
@@ -9,9 +8,14 @@ import { AuthenticationService } from '../../services/auth/authentication.servic
 })
 export class NavComponent implements OnInit {
 
-  constructor(private router: Router, private authenticationService: AuthenticationService) { }
+  email;
+  scEmail;
+
+  constructor(private authenticationService: AuthenticationService) { }
 
   ngOnInit(): void {
+    this.email = localStorage.getItem('email') || '';
+    this.scEmail = this.email.charAt(0) || '';
   }
 
   logout(): void {

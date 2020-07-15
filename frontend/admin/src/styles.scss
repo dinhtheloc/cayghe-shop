@@ -35,3 +35,7 @@
     display: block;
     transition: all 0.15s ease;
 }
+
+.modal-backdrop.show {
+    opacity: 1;
+}

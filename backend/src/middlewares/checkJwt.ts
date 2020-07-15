@@ -20,7 +20,7 @@ export const checkJwt = (req: Request, res: Response, next: NextFunction) => {
 
   const { _id, email } = jwtPayload;
   const newToken = jwt.sign({ _id: _id._id, email: email }, config.jwtSecret, {
-    expiresIn: "1h"
+    expiresIn: "4h"
   });
   res.setHeader("token", newToken);
 

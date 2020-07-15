@@ -15,8 +15,11 @@ class FileImageService {
         const _session = new schema_1.default(product_params);
         _session.save(callback);
     }
-    findProduct(query, callback) {
-        schema_1.default.findOne(query, callback);
+    findProduct(query) {
+        return new Promise((resolve) => __awaiter(this, void 0, void 0, function* () {
+            const data = yield schema_1.default.find();
+            resolve(data);
+        }));
     }
     updateProduct(product_params, callback) {
         const query = { _id: product_params._id };
@@ -36,6 +39,10 @@ class FileImageService {
             const number = yield schema_1.default.count(query);
             resolve(number);
         }));
+    }
+    delete(_id, callback) {
+        const query = { _id };
+        schema_1.default.deleteOne(query, callback);
     }
 }
 exports.default = FileImageService;

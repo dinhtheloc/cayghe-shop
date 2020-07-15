@@ -8,8 +8,12 @@ export default class FileImageService {
         _session.save(callback);
     }
 
-    public findProduct(query: any, callback: any) {
-        products.findOne(query, callback);
+    public findProduct(query: any) {
+        return new Promise(async (resolve) => {
+            const data = await products.find();
+            resolve(data);
+        });
+        
     }
 
     public updateProduct(product_params: IProduct, callback: any) {
@@ -34,9 +38,9 @@ export default class FileImageService {
         });
     }
 
-    // public deleteFileImage(path: String, callback: any) {
-    //     const query = { path: path };
-    //     fileImage.deleteOne(query, callback);
-    // }
+    public delete(_id: String, callback: any) {
+        const query = { _id };
+        products.deleteOne(query, callback);
+    }
 
 }

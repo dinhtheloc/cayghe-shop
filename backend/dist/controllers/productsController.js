@@ -16,29 +16,6 @@ class ProductsController {
     constructor() {
         this.productService = new service_1.default();
         this.changeToSlug = utils_1.changeToSlug;
-        // public delete_fileImage(req: Request, res: Response) {
-        //     const path = req.body.path;
-        //     if (path) {
-        //         this.fileImage_service.deleteFileImage(path, (err: any, delete_details) => {
-        //             if (err) {
-        //                 res.status(500).json({
-        //     message: 'Lỗi hệ thống'
-        // });
-        //             } else if (delete_details.deletedCount !== 0) {
-        //                 successResponse('delete successfull', null, res);
-        //                 // remove file at uploads folder
-        //                 fs.unlink(path, (err) => {
-        //                     if (err) throw err;
-        //                     console.log(`successfully deleted ${path}`);
-        //                 });
-        //             } else {
-        //                 failureResponse('invalid', null, res);
-        //             }
-        //         });
-        //     } else {
-        //         insufficientParameters(res);
-        //     }
-        // }
     }
     createProduct(req, res) {
         const { name, alias, price, available, arrayImage, description, inventory } = req.body;
@@ -75,16 +52,12 @@ class ProductsController {
         }
     }
     updateProduct(req, res) {
-        const { id, name, price, available, description, arrayImage, inventory } = req.body;
-        if (id) {
-            const params = { _id: id };
-            this.productService.findProduct(params, (err, product) => {
-                if (err) {
-                    res.status(500).json({
-                        message: 'Lỗi hệ thống'
-                    });
-                }
-                else if (product) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { id, name, price, available, description, arrayImage, inventory } = req.body;
+            if (id) {
+                const params = { _id: id };
+                const product = yield this.productService.findProduct(params);
+                if (product) {
                     product.updateDate = new Date(Date.now());
                     const ProductParams = {
                         _id: id,
@@ -117,13 +90,13 @@ class ProductsController {
                         message: 'Không tìm thấy sản phẩm'
                     });
                 }
-            });
-        }
-        else {
-            res.status(400).json({
-                message: 'Id là bắt buộc'
-            });
-        }
+            }
+            else {
+                res.status(400).json({
+                    message: 'Id là bắt buộc'
+                });
+            }
+        });
     }
     getProducts(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -147,6 +120,55 @@ class ProductsController {
                 });
             }
         });
+    }
+    getOne(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { slug } = req.params;
+            if (slug) {
+                const query = {
+                    alias: slug
+                };
+                const data = yield this.productService.findProduct(query);
+                if (data) {
+                    const dataResponse = {
+                        data: data
+                    };
+                    res.status(200).json(dataResponse);
+                }
+                else {
+                    res.status(400).json({
+                        message: 'Không tìm thấy sản phẩm'
+                    });
+                }
+            }
+            else {
+                res.status(400).json({
+                    message: 'pageIndex và pageSize là bắt buộc'
+                });
+            }
+        });
+    }
+    delete(req, res) {
+        const { _id } = req.body;
+        if (_id) {
+            this.productService.delete(_id, (err) => {
+                if (err) {
+                    res.status(500).json({
+                        message: 'Lỗi hệ thống'
+                    });
+                }
+                else {
+                    res.status(200).json({
+                        message: 'Xoá thành công'
+                    });
+                }
+            });
+        }
+        else {
+            res.status(400).json({
+                message: 'Thiếu id'
+            });
+        }
     }
 }
 exports.ProductsController = ProductsController;

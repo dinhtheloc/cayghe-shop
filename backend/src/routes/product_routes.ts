@@ -14,10 +14,17 @@ export class ProductRoutes {
             this.productsController.getProducts(req, res);
         });
 
-        // [checkJwt]
+        app.get('/api/product/:slug', (req: Request, res: Response) => {
+            this.productsController.getOne(req, res);
+        });
 
+        // [checkJwt]
         app.put('/api/updateProduct', [checkJwt], (req: Request, res: Response) => {
             this.productsController.updateProduct(req, res);
+        });
+
+        app.delete('/api/deleteProduct', [checkJwt], (req: Request, res: Response) => {
+            this.productsController.delete(req, res);
         });
 
     }

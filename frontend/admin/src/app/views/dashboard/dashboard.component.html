@@ -14,12 +14,12 @@
           placeholder="Nhập tên sản phẩm">
       </div>
     </div>
-    <div class="col col-md-4">
+    <div class="col col-md-4" (click)="search()">
       <button class="btn btn-primary animation-on-hover m-0">
         <span class="fas fa-search d-inline-block mr-2"></span>Tìm kiếm
       </button>
     </div>
-    <div class="col col-md-4 text-right">
+    <div class="col col-md-4 text-right" (click)="openCreatePopup()">
       <button class="btn btn-success animation-on-hover m-0 ">
         <span class="fas fa-plus d-inline-block mr-2"></span>Thêm mới sản phẩm
       </button>
@@ -42,11 +42,14 @@
               <span class="sr-only">PageSize</span>
             </button>
             <div class="dropdown-menu dropdown-black dropdown-menu-lg-right dropdown-left">
-              <a class="dropdown-item d-flex font-weight-bold" href="#">
-                10 <span class="icon icon-small ml-auto"><span class="fas fa-check"></span></span>
+              <a class="dropdown-item d-flex font-weight-bold" (click)="pageSize = 10" href="javascript://">
+                10 <span *ngIf="pageSize === 10" class="icon icon-small ml-auto"><span
+                    class="fas fa-check"></span></span>
               </a>
-              <a class="dropdown-item font-weight-bold" href="#">20</a>
-              <a class="dropdown-item font-weight-bold" href="#">30</a>
+              <a class="dropdown-item d-flex font-weight-bold" (click)="pageSize = 20" href="javascript://">20 <span
+                  *ngIf="pageSize === 20" class="icon icon-small ml-auto"><span class="fas fa-check"></span></span></a>
+              <a class="dropdown-item d-flex font-weight-bold" (click)="pageSize = 30" href="javascript://">30 <span
+                  *ngIf="pageSize === 30" class="icon icon-small ml-auto"><span class="fas fa-check"></span></span></a>
             </div>
           </div>
         </div>
@@ -60,39 +63,68 @@
             <thead class=" text-primary">
               <tr role="row" class="tablesorter-headerRow">
                 <th>
+                  STT
+                </th>
+                <th>
                   Name
                 </th>
                 <th>
-                  <div class="tablesorter-header-inner">
-                    Country
-                  </div>
+                  Giá bán
                 </th>
                 <th>
-                  <div class="tablesorter-header-inner">
-                    City
-                  </div>
+                  Số lượng tồn kho
                 </th>
                 <th>
-                  <div class="tablesorter-header-inner">
-                    Salary
-                  </div>
+                  Trang thái
+                </th>
+                <th>
+                  Ngày tạo
+                </th>
+                <th>
+                  Ngày chỉnh sửa
+                </th>
+                <th>
+                  Thao tác
                 </th>
               </tr>
             </thead>
             <tbody aria-live="polite" aria-relevant="all">
-              <tr role="row" *ngFor="let item of collection.data | paginate: config">
+              <tr role="row" *ngFor="let item of data | paginate: config; let index = index">
+
                 <td>
-                  Dakota Rice
-                </td>
-                <td>
-                  Niger
+                  {{ (index+1) + (pageIndex - 1) * pageSize }}
                 </td>
                 <td>
-                  Oud-Turnhout
+                  {{ item.name }}
                 </td>
-                <td class="text-center">
-                  $36,738
+                <td>
+                  {{ item.price }}
                 </td>
+                <td>
+                  {{ item.inventory }}
+                </td>
+                <td>
+                  <span *ngIf="item.available" class="badge badge-success">Available</span>
+                  <span *ngIf="!item.available" class="badge badge-danger">Disable</span>
+                </td>
+                <td>
+                  {{ item.createDate }}
+                </td>
+                <td>
+                  {{ item.updateDate }}
+                </td>
+                <td>
+                  <button type="button" class="btn btn-success btn-link btn-icon">
+                    <i class="fas fa-pen-square"></i>
+                  </button>
+                  <button type="button" rel="tooltip" class="btn btn-danger btn-link btn-icon"
+                    (click)="openConfirm(item._id, item.name)">
+                    <i class="fas fa-backspace"></i>
+                  </button>
+                </td>
+              </tr>
+              <tr *ngIf="!data || data.length == 0">
+                <td colspan="100%" class="text-center">Không có dữ liệu</td>
               </tr>
             </tbody>
           </table>
@@ -115,6 +147,111 @@
             </nav>
           </pagination-template>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal modal-black fade" id="createModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-xl" style="transform: none !important">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Tạo mới sản phẩm</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-lg-5">
+            <!-- Product image -->
+            <a href="javascript: void(0);" class="text-center d-block mb-4">
+              <img src="https://coderthemes.com/hyper/saas/assets/images/products/product-5.jpg" class="img-fluid"
+                style="max-width: 280px;" alt="Product-img">
+            </a>
+
+            <div class="d-lg-flex d-none justify-content-center">
+              <a href="javascript: void(0);">
+                <img src="https://coderthemes.com/hyper/saas/assets/images/products/product-1.jpg"
+                  class="img-fluid img-thumbnail p-2" style="max-width: 75px;" alt="Product-img">
+              </a>
+              <a href="javascript: void(0);" class="ml-2">
+                <img src="https://coderthemes.com/hyper/saas/assets/images/products/product-6.jpg"
+                  class="img-fluid img-thumbnail p-2" style="max-width: 75px;" alt="Product-img">
+              </a>
+              <a href="javascript: void(0);" class="ml-2">
+                <img src="https://coderthemes.com/hyper/saas/assets/images/products/product-3.jpg"
+                  class="img-fluid img-thumbnail p-2" style="max-width: 75px;" alt="Product-img">
+              </a>
+            </div>
+          </div> <!-- end col -->
+          <div class="col-lg-7">
+            <div class="pl-lg-4">
+              <!-- Product title -->
+              <h3 class="mt-0">Amazing Modern Chair (Orange)</h3>
+              <p class="mb-1">Added Date: 09/12/2018</p>
+              <p class="font-16">
+                <span class="text-warning fas fa-star"></span>
+                <span class="text-warning fas fa-star"></span>
+                <span class="text-warning fas fa-star"></span>
+                <span class="text-warning fas fa-star"></span>
+                <span class="text-warning fas fa-star"></span>
+              </p>
+              
+              <div class="mt-4">
+                <h6 class="font-14">Retail Price:</h6>
+                <h3> $139.58</h3>
+              </div>
+
+              <!-- Product description -->
+              <div class="mt-4">
+                <h6 class="font-14">Description:</h6>
+                <p>It is a long established fact that a reader will be distracted by the readable content of a
+                  page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less
+                  normal distribution of letters, as opposed to using 'Content here, content here', making it
+                  look like readable English. </p>
+              </div>
+
+              <!-- Product information -->
+              <div class="mt-4">
+                <div class="row">
+                  <div class="col-md-4">
+                    <h6 class="font-14">Available Stock:</h6>
+                    <p class="text-sm lh-150">1784</p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div> <!-- end col -->
+        </div> <!-- end row-->
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Bỏ qua</button>
+        <button type="button" class="btn btn-primary" (click)="create()">Tạo mới sản phẩm</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal confirm delete -->
+<div class="modal modal-black fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Thông báo xóa sản phẩm</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p class="text-center">Bạn có chắc chắn muốn xóa sản phẩm <strong>{{ nameDelete }}</strong> ?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Bỏ qua</button>
+        <button type="button" class="btn btn-primary" (click)="delete()">Xóa</button>
       </div>
     </div>
   </div>

@@ -14,9 +14,15 @@ class ProductRoutes {
         app.get('/api/getProducts', (req, res) => {
             this.productsController.getProducts(req, res);
         });
+        app.get('/api/product/:slug', (req, res) => {
+            this.productsController.getOne(req, res);
+        });
         // [checkJwt]
         app.put('/api/updateProduct', [checkJwt_1.checkJwt], (req, res) => {
             this.productsController.updateProduct(req, res);
+        });
+        app.delete('/api/deleteProduct', [checkJwt_1.checkJwt], (req, res) => {
+            this.productsController.delete(req, res);
         });
     }
 }

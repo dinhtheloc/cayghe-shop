@@ -36,7 +36,7 @@ class AuthController {
                     const isValidPassword = checkIfUnencryptedPasswordIsValid(password, user_data.password);
                     if (isValidPassword) {
                         //Sing JWT, valid for 1 hour
-                        const token = jwt.sign({ _id: user_data._id, email: user_data.email }, config.jwtSecret, { expiresIn: "1h" });
+                        const token = jwt.sign({ _id: user_data._id, email: user_data.email }, config.jwtSecret, { expiresIn: "4h" });
                         //Send the jwt in the response
                         res.status(200).json({
                             message: 'Đăng nhập thành công',
