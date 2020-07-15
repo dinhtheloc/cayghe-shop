@@ -26,6 +26,9 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    
+
     this.search();
   }
 
@@ -65,9 +68,53 @@ export class DashboardComponent implements OnInit {
   }
   openCreatePopup(): void {
     $('#createModal').modal('show');
+
   }
 
-  create(): void {
 
+  create(): void {
+    const templateResult = (state) => {
+      if (!state.id) {
+        return state.text;
+      }
+      console.log(state);
+      const $state = $(
+        '<span><img style="width: 50px;" src="' + state.urlImage + '" class="img-flag" /> ' + state.text + '</span>'
+      );
+      return $state;
+    };
+
+    const data = [
+      {
+          id: 0,
+          text: 'enhancement',
+          urlImage: 'https://coderthemes.com/hyper/saas/assets/images/products/product-5.jpg'
+      },
+      {
+          id: 1,
+          text: 'bug',
+          urlImage: 'https://coderthemes.com/hyper/saas/assets/images/products/product-5.jpg'
+      },
+      {
+          id: 2,
+          text: 'duplicate',
+          urlImage: 'https://coderthemes.com/hyper/saas/assets/images/products/product-5.jpg'
+      },
+      {
+          id: 3,
+          text: 'invalid',
+          urlImage: 'https://coderthemes.com/hyper/saas/assets/images/products/product-5.jpg'
+      },
+      {
+          id: 4,
+          text: 'wontfix',
+          urlImage: 'https://coderthemes.com/hyper/saas/assets/images/products/product-5.jpg'
+      }
+  ];
+    $('#test').select2({
+      data,
+      templateResult,
+      maximumSelectionLength: 2
+    });
   }
 }
