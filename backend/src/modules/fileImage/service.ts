@@ -12,18 +12,24 @@ export default class FileImageService {
         fileImage.findOne(query, callback);
     }
 
-    public getFileImage(pageSize: number, pageIndex: number) {
+    public getFileImage(pageSize: number, pageIndex: number, query: any) {
         return new Promise(async (resolve) => {
-            const data = await fileImage.find()
+            const data = await fileImage.find(query)
             .skip((pageSize * pageIndex) - pageSize)
             .limit(pageSize);
             resolve(data);
         });
     }
 
-    public getNumOfFileImage() {
+    public getAll() {
         return new Promise(async (resolve) => {
-            const query = {};
+            const data = await fileImage.find();
+            resolve(data);
+        });
+    }
+
+    public getNumOfFileImage(query) {
+        return new Promise(async (resolve) => {
             const number = await fileImage.count(query);
             resolve(number);
         });

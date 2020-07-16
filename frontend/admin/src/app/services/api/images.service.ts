@@ -11,13 +11,15 @@ export class ImagesService {
   private imagesUrl = `${environment.apiUrl}/api`;
   constructor(private http: HttpClient) { }
 
-  getall(data: any): Observable<any[]> {
-    const { pageSize, pageIndex } = data;
-    const query = {
-      pageSize,
-      pageIndex
-    };
+  getall(query: any): Observable<any[]> {
     return this.http.get<any[]>(`${this.imagesUrl}/getImages`, { params: query })
+      .pipe(
+        catchError(this.handleError<any[]>('getImage', []))
+      );
+  }
+
+  getallNotPagination(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.imagesUrl}/images/getAll`)
       .pipe(
         catchError(this.handleError<any[]>('getImage', []))
       );

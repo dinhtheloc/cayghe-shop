@@ -14,6 +14,7 @@ import { JwtInterceptor } from './services/helper/jwt.interceptor';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ImagesComponent } from './views/images/images.component';
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,6 +28,7 @@ import { ImagesComponent } from './views/images/images.component';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,

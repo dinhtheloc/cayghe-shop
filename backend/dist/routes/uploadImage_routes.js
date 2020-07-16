@@ -26,6 +26,9 @@ class UploadsRoutes {
         app.get('/api/getImages', [checkJwt_1.checkJwt], (req, res) => {
             this.fileImage_controller.getFileImage(req, res);
         });
+        app.get('/api/images/getAll', [checkJwt_1.checkJwt], (req, res) => {
+            this.fileImage_controller.getAll(req, res);
+        });
         app.delete('/api/deleteImage', [checkJwt_1.checkJwt], (req, res) => {
             this.fileImage_controller.delete_fileImage(req, res);
         });

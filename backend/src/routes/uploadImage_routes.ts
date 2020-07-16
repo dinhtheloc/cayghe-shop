@@ -20,6 +20,10 @@ export class UploadsRoutes {
             this.fileImage_controller.getFileImage(req, res);
         });
 
+        app.get('/api/images/getAll', [checkJwt], (req: Request, res: Response) => {
+            this.fileImage_controller.getAll(req, res);
+        });
+
         app.delete('/api/deleteImage', [checkJwt], (req: Request, res: Response) => {
             this.fileImage_controller.delete_fileImage(req, res);
         });

@@ -16,6 +16,7 @@ export class ImagesComponent implements OnInit {
   urlApi = environment.apiUrl;
   imageUrl;
   imageName;
+  name = '';
   path;
   fileUpload: any = 'assets/images/image_placeholder.jpg';
   file: any;
@@ -39,11 +40,15 @@ export class ImagesComponent implements OnInit {
     $('#confirmDeleteModal').modal('show');
   }
 
+  
+
   search(): void {
     const params = {
       pageIndex: this.pageIndex,
-      pageSize: this.pageSize
+      pageSize: this.pageSize,
+      name: this.name
     };
+    console.log(params);
     this.imagesService.getall(params).subscribe((data: any) => {
       console.log(data);
       this.data = data.data || [];

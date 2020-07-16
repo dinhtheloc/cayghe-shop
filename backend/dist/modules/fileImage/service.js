@@ -18,17 +18,22 @@ class FileImageService {
     filterFileImage(query, callback) {
         schema_1.default.findOne(query, callback);
     }
-    getFileImage(pageSize, pageIndex) {
+    getFileImage(pageSize, pageIndex, query) {
         return new Promise((resolve) => __awaiter(this, void 0, void 0, function* () {
-            const data = yield schema_1.default.find()
+            const data = yield schema_1.default.find(query)
                 .skip((pageSize * pageIndex) - pageSize)
                 .limit(pageSize);
             resolve(data);
         }));
     }
-    getNumOfFileImage() {
+    getAll() {
         return new Promise((resolve) => __awaiter(this, void 0, void 0, function* () {
-            const query = {};
+            const data = yield schema_1.default.find();
+            resolve(data);
+        }));
+    }
+    getNumOfFileImage(query) {
+        return new Promise((resolve) => __awaiter(this, void 0, void 0, function* () {
             const number = yield schema_1.default.count(query);
             resolve(number);
         }));

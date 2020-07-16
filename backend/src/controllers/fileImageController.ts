@@ -44,8 +44,13 @@ export class FileImageController {
     public async getFileImage(req: Request, res: Response) {
         const { pageIndex, pageSize } = req.query;
         if (pageIndex && pageSize) {
-            const data = await this.fileImage_service.getFileImage(Number(pageSize), Number(pageIndex));
-            const num = await this.fileImage_service.getNumOfFileImage();
+            const name = req.query.name || '';
+            const query = {
+                'name': { $regex: name, $options: "i" }
+            }
+
+            const data = await this.fileImage_service.getFileImage(Number(pageSize), Number(pageIndex), query);
+            const num = await this.fileImage_service.getNumOfFileImage(query);
 
             const dataResponse = {
                 data: data,
@@ -63,6 +68,16 @@ export class FileImageController {
             });
         }
     }
+
+    public async getAll(req: Request, res: Response) {
+        const data = await this.fileImage_service.getAll();
+        const dataResponse = {
+            data: data
+        }
+        res.status(200).json(dataResponse);
+    }
+
+
 
     public delete_fileImage(req: Request, res: Response) {
         const path = req.body.path;

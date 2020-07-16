@@ -55,8 +55,12 @@ class FileImageController {
         return __awaiter(this, void 0, void 0, function* () {
             const { pageIndex, pageSize } = req.query;
             if (pageIndex && pageSize) {
-                const data = yield this.fileImage_service.getFileImage(Number(pageSize), Number(pageIndex));
-                const num = yield this.fileImage_service.getNumOfFileImage();
+                const name = req.query.name || '';
+                const query = {
+                    'name': { $regex: name, $options: "i" }
+                };
+                const data = yield this.fileImage_service.getFileImage(Number(pageSize), Number(pageIndex), query);
+                const num = yield this.fileImage_service.getNumOfFileImage(query);
                 const dataResponse = {
                     data: data,
                     pagination: {
@@ -73,6 +77,15 @@ class FileImageController {
                     data: {}
                 });
             }
+        });
+    }
+    getAll(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const data = yield this.fileImage_service.getAll();
+            const dataResponse = {
+                data: data
+            };
+            res.status(200).json(dataResponse);
         });
     }
     delete_fileImage(req, res) {
