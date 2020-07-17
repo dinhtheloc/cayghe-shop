@@ -26,12 +26,12 @@ export class DashboardComponent implements OnInit {
   isInitSelect2 = false;
 
   createForm = new FormGroup({
-    name: new FormControl('', Validators.required),
-    alias: new FormControl(''),
-    price: new FormControl(0, Validators.required),
+    name: new FormControl(null, Validators.required),
+    alias: new FormControl(null),
+    price: new FormControl(null, Validators.required),
     arrayImage: new FormControl([]),
-    inventory: new FormControl(0, Validators.required),
-    description: new FormControl('', Validators.required),
+    inventory: new FormControl(null, Validators.required),
+    description: new FormControl(null, Validators.required),
     available: new FormControl(false)
   });
   submitted = false;
@@ -167,13 +167,27 @@ export class DashboardComponent implements OnInit {
   }
 
   nameChanged(): void {
-    console.log(this.f.name.value);
     const slug = this.changeToSlug(this.f.name.value);
-    console.log('slug', slug);
 
     this.createForm.patchValue({
       alias: slug
     });
+  }
+
+
+  makeArrayImages(): Array<any> {
+    const result = [];
+    if (this.selectedImage) {
+      this.selectedImage.map(i => {
+        const { path, name } = i;
+        result.push({
+          path,
+          name
+        });
+      });
+    }
+
+    return result;
   }
 
   create(): void {
@@ -182,19 +196,24 @@ export class DashboardComponent implements OnInit {
     if (this.createForm.invalid) {
       return;
     }
-    console.log(this.f);
 
-    // this.authenticationService.login(this.f.email.value, this.f.password.value)
-    //   .pipe(first())
-    //   .subscribe(
-    //     data => {
-    //       this.notificationService.showNotificationSuccess('Đăng nhập thành công');
-    //       this.router.navigate([this.returnUrl]);
-    //     },
-    //     error => {
+    const data = {
+      name: this.f.name.value,
+      price: this.f.price.value,
+      arrayImage: this.makeArrayImages(),
+      inventory: this.f.inventory.value,
+      description: this.f.description.value,
+      available: this.f.available.value
+    };
 
-    //       this.notificationService.showNotificationDanger(error);
-    //       this.loading = false;
-    //     });
+    this.productsService.create(data).subscribe(
+      resp => {
+        this.notificationService.showNotificationSuccess('Tạo mới sản phẩm thành công');
+        this.search();
+        $('#createModal').modal('hide');
+      },
+      error => {
+        this.notificationService.showNotificationDanger(error);
+      });
   }
 }

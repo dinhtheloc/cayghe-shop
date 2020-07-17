@@ -32,8 +32,8 @@ export class ProductsService {
       );
   }
 
+  // tslint:disable-next-line:variable-name
   deleteProduct(_id: any): Observable<any[]> {
-
     const options = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
@@ -43,6 +43,14 @@ export class ProductsService {
       }
     };
     return this.http.delete<any[]>(`${this.productsUrl}/deleteProduct`, options)
+      .pipe(
+        catchError(this.handleError<any[]>('', []))
+      );
+  }
+
+  // tslint:disable-next-line:variable-name
+  create(data: any): Observable<any[]> {
+    return this.http.post<any[]>(`${this.productsUrl}/product/create`, data)
       .pipe(
         catchError(this.handleError<any[]>('', []))
       );

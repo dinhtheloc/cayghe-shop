@@ -19,6 +19,7 @@ class ProductsController {
     }
     createProduct(req, res) {
         const { name, alias, price, available, arrayImage, description, inventory } = req.body;
+        console.log('body', req.body);
         if (name) {
             const product = {
                 name: name.trim(),

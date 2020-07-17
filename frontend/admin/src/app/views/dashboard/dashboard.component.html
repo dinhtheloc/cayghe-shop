@@ -203,16 +203,15 @@
                   'has-danger': submitted && f.name.errors
                 }">
                     <label for="name">Tên sản phẩm *</label>
-                    <input type="text" class="form-control" 
-                    (change)="nameChanged()"
-                    id="name" aria-describedby="name" formControlName="name"
-                      placeholder="Nhập tên sản phẩm">
+                    <input type="text" class="form-control" (change)="nameChanged()" id="name" aria-describedby="name"
+                      formControlName="name" placeholder="Nhập tên sản phẩm">
                   </div>
                 </div>
                 <div class="mt-4">
                   <div class="form-group m-0">
                     <label for="alias">Đường dẫn sản phẩm</label>
-                    <input type="text" class="form-control" id="alias" aria-describedby="alias" formControlName="alias" disabled>
+                    <input type="text" class="form-control" id="alias" aria-describedby="alias" formControlName="alias"
+                      disabled>
                   </div>
                 </div>
                 <div class="mt-4">

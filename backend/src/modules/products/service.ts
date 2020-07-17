@@ -10,7 +10,8 @@ export default class FileImageService {
 
     public findProduct(query: any) {
         return new Promise(async (resolve) => {
-            const data = await products.find();
+            const data = await products.find()
+            .sort({updateDate: 'descending'});
             resolve(data);
         });
         
@@ -24,6 +25,7 @@ export default class FileImageService {
     public getProducts(pageSize: number, pageIndex: number) {
         return new Promise(async (resolve) => {
             const data = await products.find()
+            .sort({updateDate: 'descending'})
             .skip((pageSize * pageIndex) - pageSize)
             .limit(pageSize);
             resolve(data);

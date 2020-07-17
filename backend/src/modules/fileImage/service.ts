@@ -15,6 +15,7 @@ export default class FileImageService {
     public getFileImage(pageSize: number, pageIndex: number, query: any) {
         return new Promise(async (resolve) => {
             const data = await fileImage.find(query)
+            .sort({updateDate: 'descending'})
             .skip((pageSize * pageIndex) - pageSize)
             .limit(pageSize);
             resolve(data);

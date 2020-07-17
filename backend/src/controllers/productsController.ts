@@ -8,7 +8,9 @@ export class ProductsController {
     private changeToSlug = changeToSlug;
 
     public createProduct(req: Request, res: Response) {
+
         const { name, alias, price, available, arrayImage, description, inventory } = req.body;
+        console.log('body',req.body);
         if (name) {
 
             const product: IProduct = {

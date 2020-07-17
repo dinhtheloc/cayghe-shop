@@ -8,7 +8,7 @@ class ProductRoutes {
         this.productsController = new productsController_1.ProductsController();
     }
     route(app) {
-        app.post('/api/createProduct', [checkJwt_1.checkJwt], (req, res) => {
+        app.post('/api/product/create', [checkJwt_1.checkJwt], (req, res) => {
             this.productsController.createProduct(req, res);
         });
         app.get('/api/getProducts', (req, res) => {
