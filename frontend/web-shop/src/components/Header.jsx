@@ -5,7 +5,7 @@ import { Helmet } from "react-helmet";
 function Header(props) {
     return (
         <>
-            <nav className="navbar navbar-expand-lg navbar-light navbar-reveal fixed-top bg-white">
+            <nav className="navbar navbar-expand-lg navbar-light navbar-reveal bg-white">
                 <div className="container-lg">
 
                     <a className="navbar-brand d-lg-none" href="./index.html">Goodkit</a>
@@ -468,6 +468,39 @@ function Header(props) {
 
 
 
+            <section class="pt-6 pt-md-11 pb-8 pb-md-9">
+                <div class="container-lg">
+                    <div class="row justify-content-center">
+                        <div class="col-md-12 col-xl-10 text-center">
+
+
+                            <h1 class="display-2 mb-4">
+                                A modern design system for your new <span class="text-underline-warning d-none d-xl-inline"><span data-typed data-options='{"strings": ["SaaS platform", "data API", "iOS app", "online course", "coworking space"]}'></span></span><span class="text-underline-warning d-xl-none">business</span>.
+            </h1>
+
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-md-8 col-lg-6 text-center">
+
+
+                            <p class="lead text-muted">
+                                Goodkit will make your product look modern and professional while saving you precious time.
+            </p>
+
+
+                            <a class="btn btn-primary lift" href="https://themes.getbootstrap.com/product/goodkit/" target="_blank">
+                                Purchase
+            </a>
+                            <a class="btn btn-white lift ml-3" href="docs/index.html">
+                                <span class="d-sm-none">Docs</span><span class="d-none d-sm-inline-block">Documentation</span>
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+
 
 
             <section class="pt-6 pt-md-11 pb-11 pb-md-13">
@@ -528,119 +561,125 @@ function Header(props) {
                                     <div class="flickity-buttons-overlap position-static vw-100 w-sm-100 ml-n4 ml-sm-0" data-flickity='{"autoPlay": true, "imagesLoaded": true, "pageDots": false, "wrapAround": true}' id="imageSlider">
                                         <div class="w-100">
 
-                                            
-                    <img class="img-fluid pos-relative" src="assets/img/e-commerce/customer-hero-1.jpg" alt="..." data-aos="wipe-left" data-aos-delay="150"/>
 
-                  </div>
-                                            <div class="w-100">
+                                            <img class="img-fluid pos-relative" src="assets/img/e-commerce/customer-hero-1.jpg" alt="..." data-aos="wipe-left" data-aos-delay="150" />
 
-                                                
-                    <img class="img-fluid" src="assets/img/e-commerce/customer-hero-2.jpg" alt="..."/>
-
-                  </div>
-                                                <div class="w-100">
-
-                                                    
-                    <img class="img-fluid" src="assets/img/e-commerce/customer-hero-3.jpg" alt="..."/>
-
-                  </div>
-                                                </div>
-
-                                            </div>
-                                            <div class="col-md-8 col-xl-6 order-md-0">
-
-
-                                                <div class="shadow-lg bg-white mt-n10 mt-md-0" data-flickity='{"fade": true, "asNavFor": "#imageSlider", "draggable": false, "imagesLoaded": true, "pageDots": false, "prevNextButtons": false, "wrapAround": true}' data-aos="fade-up" data-aos-delay="200">
-                                                    <div class="w-100">
-
-
-                                                        <div class="card card-lg shadow-none">
-                                                            <div class="card-body text-center">
-
-
-                                                                <h6 class="text-uppercase text-warning mb-5">
-                                                                    01. Brand
-                        </h6>
-
-
-                                                                <h1 class="mb-4">
-                                                                    Building your brand.
-                        </h1>
-
-
-
-                                                                <p class="text-muted mb-5">
-                                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. In urna lectus, mattis non accumsan in, tempor dictum neque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In urna lectus.
-                        </p>
-
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-                                                    <div class="w-100">
-
-
-                                                        <div class="card card-lg shadow-none">
-                                                            <div class="card-body text-center">
-
-
-                                                                <h6 class="text-uppercase text-warning mb-5">
-                                                                    02. Audience
-                        </h6>
-
-
-                                                                <h1 class="mb-4">
-                                                                    Finding your audience.
-                        </h1>
-
-
-
-                                                                <p class="text-muted mb-5">
-                                                                    In urna lectus, mattis non accumsan in, tempor dictum neque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In urna lectus. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        </p>
-
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-                                                    <div class="w-100">
-
-
-                                                        <div class="card card-lg shadow-none">
-                                                            <div class="card-body text-center">
-
-
-                                                                <h6 class="text-uppercase text-warning mb-5">
-                                                                    03. Operations
-                        </h6>
-
-
-                                                                <h1 class="mb-4">
-                                                                    Running your business.
-                        </h1>
-
-
-
-                                                                <p class="text-muted mb-5">
-                                                                    In hac habitasse platea dictumst. Lorem ipsum dolor sit amet, consectetur adipiscing. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In urna lectus, mattis non accumsan in, tempor.
-                        </p>
-
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-
-                                            </div>
                                         </div>
+                                        <div class="w-100">
 
+
+                                            <img class="img-fluid" src="assets/img/e-commerce/customer-hero-2.jpg" alt="..." />
+
+                                        </div>
+                                        <div class="w-100">
+
+
+                                            <img class="img-fluid" src="assets/img/e-commerce/customer-hero-3.jpg" alt="..." />
+
+                                        </div>
                                     </div>
+
+                                </div>
+                                <div class="col-md-8 col-xl-6 order-md-0">
+
+
+                                    <div class="shadow-lg bg-white mt-n10 mt-md-0" data-flickity='{"fade": true, "asNavFor": "#imageSlider", "draggable": false, "imagesLoaded": true, "pageDots": false, "prevNextButtons": false, "wrapAround": true}' data-aos="fade-up" data-aos-delay="200">
+                                        <div class="w-100">
+
+
+                                            <div class="card card-lg shadow-none">
+                                                <div class="card-body text-center">
+
+
+                                                    <h6 class="text-uppercase text-warning mb-5">
+                                                        01. Brand
+                        </h6>
+
+
+                                                    <h1 class="mb-4">
+                                                        Building your brand.
+                        </h1>
+
+
+
+                                                    <p class="text-muted mb-5">
+                                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. In urna lectus, mattis non accumsan in, tempor dictum neque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In urna lectus.
+                        </p>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="w-100">
+
+
+                                            <div class="card card-lg shadow-none">
+                                                <div class="card-body text-center">
+
+
+                                                    <h6 class="text-uppercase text-warning mb-5">
+                                                        02. Audience
+                        </h6>
+
+
+                                                    <h1 class="mb-4">
+                                                        Finding your audience.
+                        </h1>
+
+
+
+                                                    <p class="text-muted mb-5">
+                                                        In urna lectus, mattis non accumsan in, tempor dictum neque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In urna lectus. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        </p>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="w-100">
+
+
+                                            <div class="card card-lg shadow-none">
+                                                <div class="card-body text-center">
+
+
+                                                    <h6 class="text-uppercase text-warning mb-5">
+                                                        03. Operations
+                        </h6>
+
+
+                                                    <h1 class="mb-4">
+                                                        Running your business.
+                        </h1>
+
+
+
+                                                    <p class="text-muted mb-5">
+                                                        In hac habitasse platea dictumst. Lorem ipsum dolor sit amet, consectetur adipiscing. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In urna lectus, mattis non accumsan in, tempor.
+                        </p>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
-    </section>
-                        <Helmet>
-                            <script src="/js/theme.min.js" type="text/javascript" />
-                        </Helmet>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+
+
+
+
+            <Helmet>
+                <script src="/js/theme.min.js" type="text/javascript" />
+            </Helmet>
 
 
 
@@ -651,7 +690,7 @@ function Header(props) {
 
 Header.propTypes = {
 
-                    }
+}
 
 export default Header
 
