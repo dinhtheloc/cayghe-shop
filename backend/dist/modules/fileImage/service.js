@@ -21,6 +21,7 @@ class FileImageService {
     getFileImage(pageSize, pageIndex, query) {
         return new Promise((resolve) => __awaiter(this, void 0, void 0, function* () {
             const data = yield schema_1.default.find(query)
+                .sort({ updateDate: 'descending' })
                 .skip((pageSize * pageIndex) - pageSize)
                 .limit(pageSize);
             resolve(data);

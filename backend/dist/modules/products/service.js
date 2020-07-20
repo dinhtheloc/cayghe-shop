@@ -17,7 +17,8 @@ class FileImageService {
     }
     findProduct(query) {
         return new Promise((resolve) => __awaiter(this, void 0, void 0, function* () {
-            const data = yield schema_1.default.find();
+            const data = yield schema_1.default.find()
+                .sort({ updateDate: 'descending' });
             resolve(data);
         }));
     }
@@ -28,6 +29,7 @@ class FileImageService {
     getProducts(pageSize, pageIndex) {
         return new Promise((resolve) => __awaiter(this, void 0, void 0, function* () {
             const data = yield schema_1.default.find()
+                .sort({ updateDate: 'descending' })
                 .skip((pageSize * pageIndex) - pageSize)
                 .limit(pageSize);
             resolve(data);
