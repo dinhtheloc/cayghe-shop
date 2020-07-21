@@ -5,7 +5,7 @@ import { Helmet } from "react-helmet";
 function Header(props) {
     return (
         <>
-            <nav className="navbar navbar-expand-lg navbar-light navbar-reveal bg-white">
+            <nav className="navbar navbar-expand-lg navbar-light navbar-reveal bg-light">
                 <div className="container-lg">
 
                     <a className="navbar-brand d-lg-none" href="./index.html">Goodkit</a>
@@ -466,81 +466,7 @@ function Header(props) {
                 </div>
             </nav>
 
-
-
-            <section class="pt-6 pt-md-11 pb-8 pb-md-9">
-                <div class="container-lg">
-                    <div class="row justify-content-center">
-                        <div class="col-md-12 col-xl-10 text-center">
-
-
-                            <h1 class="display-2 mb-4">
-                                A modern design system for your new <span class="text-underline-warning d-none d-xl-inline"><span data-typed data-options='{"strings": ["SaaS platform", "data API", "iOS app", "online course", "coworking space"]}'></span></span><span class="text-underline-warning d-xl-none">business</span>.
-            </h1>
-
-                        </div>
-                    </div>
-                    <div class="row justify-content-center">
-                        <div class="col-md-8 col-lg-6 text-center">
-
-
-                            <p class="lead text-muted">
-                                Goodkit will make your product look modern and professional while saving you precious time.
-            </p>
-
-
-                            <a class="btn btn-primary lift" href="https://themes.getbootstrap.com/product/goodkit/" target="_blank">
-                                Purchase
-            </a>
-                            <a class="btn btn-white lift ml-3" href="docs/index.html">
-                                <span class="d-sm-none">Docs</span><span class="d-none d-sm-inline-block">Documentation</span>
-                            </a>
-
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-
-
-            <section class="pt-6 pt-md-11 pb-11 pb-md-13">
-                <div class="container-lg">
-                    <div class="row justify-content-center">
-                        <div class="col-md-10 col-lg-8 col-xl-6 text-center" data-aos="fade-up">
-
-
-                            <h1 class="display-3 mb-4">
-                                One stop to run your <span class="text-underline-warning">whole shop</span>.
-            </h1>
-
-
-
-                            <p class="font-size-lg text-muted">
-                                From point of sale to payroll,<br />
-                                    we got you covered for everything.
-            </p>
-
-
-                            <a class="btn btn-primary lift" href="#!">
-                                Create an Account
-            </a>
-
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-
-            <div class="position-relative">
-                <div class="shape shape-fluid-x shape-bottom text-white pb-14">
-                    <div class="shape-img pb-8 pb-md-11">
-                        <svg viewBox="0 0 100 50" preserveAspectRatio="none"><path d="M0 0h100v25H75L25 50H0z" fill="currentColor" /></svg>
-                    </div>
-                </div>
-            </div>
-
-
-            <section class="bg-light">
+            <section class="bg-light pt-6 pt-md-11 pb-8 pb-md-9">
                 <div class="container-lg">
                     <div class="row no-gutters">
                         <div class="col-12">
@@ -560,81 +486,50 @@ function Header(props) {
 
                                     <div class="flickity-buttons-overlap position-static vw-100 w-sm-100 ml-n4 ml-sm-0" data-flickity='{"autoPlay": true, "imagesLoaded": true, "pageDots": false, "wrapAround": true}' id="imageSlider">
                                         <div class="w-100">
-
-
-                                            <img class="img-fluid pos-relative" src="assets/img/e-commerce/customer-hero-1.jpg" alt="..." data-aos="wipe-left" data-aos-delay="150" />
-
+                                            <img class="img-fluid pos-relative" src="https://goodkit.goodthemes.co/assets/img/e-commerce/customer-hero-1.jpg" alt="..." data-aos="wipe-left" data-aos-delay="150" />
                                         </div>
                                         <div class="w-100">
-
-
-                                            <img class="img-fluid" src="assets/img/e-commerce/customer-hero-2.jpg" alt="..." />
-
+                                            <img class="img-fluid" src="https://goodkit.goodthemes.co/assets/img/e-commerce/customer-hero-2.jpg" alt="..." />
                                         </div>
                                         <div class="w-100">
-
-
-                                            <img class="img-fluid" src="assets/img/e-commerce/customer-hero-3.jpg" alt="..." />
-
+                                            <img class="img-fluid" src="https://goodkit.goodthemes.co/assets/img/e-commerce/customer-hero-3.jpg" alt="..." />
                                         </div>
                                     </div>
-
                                 </div>
                                 <div class="col-md-8 col-xl-6 order-md-0">
-
-
-                                    <div class="shadow-lg bg-white mt-n10 mt-md-0" data-flickity='{"fade": true, "asNavFor": "#imageSlider", "draggable": false, "imagesLoaded": true, "pageDots": false, "prevNextButtons": false, "wrapAround": true}' data-aos="fade-up" data-aos-delay="200">
+                                    <div class="shadow-lg bg-white mt-n10 mt-md-0"
+                                        data-flickity='{"fade": true, "asNavFor": "#imageSlider", "draggable": false, "imagesLoaded": true, "pageDots": false, "prevNextButtons": false, "wrapAround": true}'
+                                        data-aos="fade-up" data-aos-delay="200">
                                         <div class="w-100">
-
-
                                             <div class="card card-lg shadow-none">
                                                 <div class="card-body text-center">
-
-
                                                     <h6 class="text-uppercase text-warning mb-5">
                                                         01. Brand
-                        </h6>
-
-
+                                                    </h6>
                                                     <h1 class="mb-4">
                                                         Building your brand.
-                        </h1>
-
-
-
+                                                    </h1>
                                                     <p class="text-muted mb-5">
                                                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. In urna lectus, mattis non accumsan in, tempor dictum neque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In urna lectus.
-                        </p>
-
+                                                    </p>
                                                 </div>
                                             </div>
 
                                         </div>
                                         <div class="w-100">
-
-
                                             <div class="card card-lg shadow-none">
                                                 <div class="card-body text-center">
-
-
                                                     <h6 class="text-uppercase text-warning mb-5">
                                                         02. Audience
-                        </h6>
-
-
+                                                    </h6>
                                                     <h1 class="mb-4">
                                                         Finding your audience.
-                        </h1>
-
-
-
+                                                    </h1>
                                                     <p class="text-muted mb-5">
                                                         In urna lectus, mattis non accumsan in, tempor dictum neque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In urna lectus. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        </p>
-
+                                                    </p>
                                                 </div>
                                             </div>
-
                                         </div>
                                         <div class="w-100">
 
@@ -645,18 +540,18 @@ function Header(props) {
 
                                                     <h6 class="text-uppercase text-warning mb-5">
                                                         03. Operations
-                        </h6>
+                                                    </h6>
 
 
                                                     <h1 class="mb-4">
                                                         Running your business.
-                        </h1>
+                                                    </h1>
 
 
 
                                                     <p class="text-muted mb-5">
                                                         In hac habitasse platea dictumst. Lorem ipsum dolor sit amet, consectetur adipiscing. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In urna lectus, mattis non accumsan in, tempor.
-                        </p>
+                                                    </p>
 
                                                 </div>
                                             </div>
@@ -673,10 +568,14 @@ function Header(props) {
             </section>
 
 
-
-
-
-
+            <div class="position-relative">
+                <div class="shape shape-fluid-x shape-bottom text-light">
+                    <div class="shape-img pb-8 pb-md-11">
+                        <svg viewBox="0 0 100 50" preserveAspectRatio="none"><path d="M0 0h100v50H75L25 25H0z" fill="currentColor"></path></svg>
+                    </div>
+                </div>
+            </div>
+            
             <Helmet>
                 <script src="/js/theme.min.js" type="text/javascript" />
             </Helmet>
