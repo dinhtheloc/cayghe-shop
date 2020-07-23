@@ -1,0 +1,49 @@
+.page-title-overlap+* {
+    position: relative;
+    margin-top: -4.875rem;
+    z-index: 5;
+}
+
+.preview-image {
+    background-color: #fff !important;
+}
+
+@media (max-width: 991.98px) {
+    .page-title-overlap {
+        padding-bottom: 5.5rem;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .thumblist {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        -ms-flex-pack: center;
+        justify-content: center;
+        margin-right: -1rem;
+        margin-left: -1rem;
+        padding-top: 1rem;
+    }
+    .thumblist-item {
+        display: block;
+        position: relative;
+        width: 5rem;
+        height: 5rem;
+        margin: .625rem;
+        transition: border-color 0.2s ease-in-out;
+        border: 1px solid #e3e9ef;
+        border-radius: .3125rem;
+        text-decoration: none !important;
+        overflow: hidden;
+    }
+
+    .thumblist-item>img {
+        display: block;
+        width: 100%;
+        transition: opacity .2s ease-in-out;
+        opacity: .6;
+    }
+}
+

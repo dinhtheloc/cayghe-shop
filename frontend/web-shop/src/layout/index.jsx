@@ -5,6 +5,7 @@ import {
     Route, Switch
 } from "react-router-dom";
 import Home from '../views/Home';
+import ProductDetail from '../views/ProductDetail';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
@@ -15,6 +16,10 @@ function Layout(props) {
         <Router>
             <Header></Header>
             <Switch>
+                <Route path="/product/:slug">
+                    <ProductDetail />
+                </Route>
+
                 <Route path="/">
                     <Home />
                 </Route>
