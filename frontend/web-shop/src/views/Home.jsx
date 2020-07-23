@@ -161,6 +161,7 @@ function Home(props) {
                                     <a class="stretched-link" href="blog-post.html"></a>
                                 </div>
                             </div>
+                        
                         </div>
                         <div class="col-md-4">
                             <div class="card card-sm rounded-top-left rounded-bottom-right lift lift-lg mt-6">
