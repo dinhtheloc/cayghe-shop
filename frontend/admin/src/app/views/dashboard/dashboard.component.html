@@ -238,8 +238,6 @@
                   </div>
                 </div>
                 <div class="form-check mt-4">
-
-
                   <label class="form-check-label">
                     <input class="form-check-input" type="checkbox" formControlName="available" id="available"
                       [value]="true">
@@ -248,6 +246,15 @@
                   </label>
                 </div>
 
+                <div class="mt-4">
+                  <div class="form-group m-0" [ngClass]="{ 
+                  'has-danger': submitted && f.linkShopee.errors
+                }">
+                    <label for="linkShopee">Link Shopee *</label>
+                    <input type="text" class="form-control" id="linkShopee" aria-describedby="linkShopee"
+                      formControlName="linkShopee" placeholder="Nhập link shopee">
+                  </div>
+                </div>
 
                 <div class="mt-4">
                   <div class="form-group m-0" [ngClass]="{ 

@@ -3,7 +3,7 @@ import React from 'react'
 function Header(props) {
     return (
         <>
-            <nav className="navbar navbar-expand-lg navbar-light navbar-reveal bg-light">
+            <nav className="navbar navbar-expand-lg navbar-light navbar-reveal ">
                 <div className="container-lg">
 
                     <a className="navbar-brand d-lg-none" href="./index.html">Goodkit</a>

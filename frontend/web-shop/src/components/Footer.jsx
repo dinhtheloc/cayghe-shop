@@ -2,7 +2,7 @@ import React from 'react';
 
 function Footer(props) {
     return (
-        <footer className="footer py-8 pt-md-11 bg-dark mt-12">
+        <footer className="footer py-8 pt-md-11 bg-dark">
             <div className="container-lg">
                 <div className="row">
                     <div className="col-md-4">

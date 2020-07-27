@@ -5,6 +5,7 @@ export interface IProduct {
     price: Number;
     arrayImage: Array<any>;
     inventory: Number;
+    linkShopee: String;
     description: String;
     available: Boolean;
     createDate: Date;

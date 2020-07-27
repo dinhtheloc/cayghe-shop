@@ -9,8 +9,7 @@ export class ProductsController {
 
     public createProduct(req: Request, res: Response) {
 
-        const { name, alias, price, available, arrayImage, description, inventory } = req.body;
-        console.log('body',req.body);
+        const { name, alias, linkShopee, price, available, arrayImage, description, inventory } = req.body;
         if (name) {
 
             const product: IProduct = {
@@ -19,6 +18,7 @@ export class ProductsController {
                 price: price || 0,
                 arrayImage: arrayImage || [],
                 inventory: inventory || 0,
+                linkShopee: linkShopee || '',
                 description: description || '',
                 available: available || false,
                 createDate: new Date(),

@@ -28,6 +28,7 @@ export class DashboardComponent implements OnInit {
   createForm = new FormGroup({
     name: new FormControl(null, Validators.required),
     alias: new FormControl(null),
+    linkShopee: new FormControl(null, Validators.required),
     price: new FormControl(null, Validators.required),
     arrayImage: new FormControl([]),
     inventory: new FormControl(null, Validators.required),
@@ -203,6 +204,7 @@ export class DashboardComponent implements OnInit {
       arrayImage: this.makeArrayImages(),
       inventory: this.f.inventory.value,
       description: this.f.description.value,
+      linkShopee: this.f.linkShopee.value,
       available: this.f.available.value
     };
 

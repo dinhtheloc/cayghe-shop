@@ -5,7 +5,7 @@ import Leaf from '../components/Leaf';
 function Home(props) {
     return (
         <>
-            <section class="bg-light pt-6 pt-md-11 pb-8 pb-md-9">
+            <section class="pt-6 pt-md-11 pb-8 pb-md-9">
                 <div class="container-lg">
                     <div class="row no-gutters">
                         <div class="col-12">
@@ -106,7 +106,7 @@ function Home(props) {
                 </div>
             </section>
 
-
+{/* 
             <div class="position-relative">
                 <div class="shape shape-fluid-x shape-bottom text-light">
                     <div class="shape-img pb-8 pb-md-11">
@@ -114,11 +114,11 @@ function Home(props) {
                     </div>
                 </div>
             </div>
-
+ */}
 
             {/* products */}
 
-            <section class="pt-9 pt-md-11">
+            <section class="pt-9 pt-md-11 pb-9">
                 <div class="container-lg">
                     <div class="row align-items-center mb-6">
                         <div class="col-md">
@@ -220,6 +220,7 @@ function Home(props) {
                             </div>
                         </div>
                     </div>
+                
                 </div>
             </section>
 
