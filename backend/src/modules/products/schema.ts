@@ -10,6 +10,7 @@ const schema = new Schema({
     inventory: Number,
     images: [ImageSchema],
     description: String,
+    linkShopee: String,
     available: Boolean,
     createDate: Date,
     updateDate: Date

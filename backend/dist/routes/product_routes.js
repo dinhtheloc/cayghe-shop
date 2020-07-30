@@ -17,7 +17,7 @@ class ProductRoutes {
         app.get('/api/product/:slug', (req, res) => {
             this.productsController.getOne(req, res);
         });
-        app.put('/api/update/product', [checkJwt_1.checkJwt], (req, res) => {
+        app.put('/api/product/update', [checkJwt_1.checkJwt], (req, res) => {
             this.productsController.updateProduct(req, res);
         });
         app.delete('/api/deleteProduct', [checkJwt_1.checkJwt], (req, res) => {

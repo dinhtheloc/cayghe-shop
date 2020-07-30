@@ -56,6 +56,14 @@ export class ProductsService {
       );
   }
 
+  // tslint:disable-next-line:variable-name
+  update(data: any): Observable<any[]> {
+    return this.http.put<any[]>(`${this.productsUrl}/product/update`, data)
+      .pipe(
+        catchError(this.handleError<any[]>('', []))
+      );
+  }
+
 
   /** GET hero by id. Return `undefined` when id not found */
   // getHeroNo404<Data>(id: number): Observable<Hero> {

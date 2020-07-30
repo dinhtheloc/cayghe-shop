@@ -17,6 +17,14 @@ export default class FileImageService {
         
     }
 
+    public findOne(query: any) {
+        return new Promise(async (resolve) => {
+            const data = await products.findOne(query);
+            resolve(data);
+        });
+        
+    }
+
     public updateProduct(product_params: IProduct, callback: any) {
         const query = { _id: product_params._id };
         products.findOneAndUpdate(query, product_params, callback);

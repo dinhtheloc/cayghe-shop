@@ -3,7 +3,7 @@ export interface IProduct {
     name: String;
     alias: String;
     price: Number;
-    arrayImage: Array<any>;
+    images: Array<any>;
     inventory: Number;
     linkShopee: String;
     description: String;

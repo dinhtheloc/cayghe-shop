@@ -22,6 +22,12 @@ class FileImageService {
             resolve(data);
         }));
     }
+    findOne(query) {
+        return new Promise((resolve) => __awaiter(this, void 0, void 0, function* () {
+            const data = yield schema_1.default.findOne(query);
+            resolve(data);
+        }));
+    }
     updateProduct(product_params, callback) {
         const query = { _id: product_params._id };
         schema_1.default.findOneAndUpdate(query, product_params, callback);

@@ -18,15 +18,15 @@ class ProductsController {
         this.changeToSlug = utils_1.changeToSlug;
     }
     createProduct(req, res) {
-        const { name, alias, price, available, arrayImage, description, inventory } = req.body;
-        console.log('body', req.body);
+        const { name, alias, linkShopee, price, available, images, description, inventory } = req.body;
         if (name) {
             const product = {
                 name: name.trim(),
                 alias: alias || this.changeToSlug(name),
                 price: price || 0,
-                arrayImage: arrayImage || [],
+                images: images || [],
                 inventory: inventory || 0,
+                linkShopee: linkShopee || '',
                 description: description || '',
                 available: available || false,
                 createDate: new Date(),
@@ -54,24 +54,27 @@ class ProductsController {
     }
     updateProduct(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { id, name, price, available, description, arrayImage, inventory } = req.body;
+            const { id, price, available, linkShopee, description, images, inventory } = req.body;
+            console.log(req.body);
             if (id) {
                 const params = { _id: id };
-                const product = yield this.productService.findProduct(params);
+                const product = yield this.productService.findOne(params);
                 if (product) {
                     product.updateDate = new Date(Date.now());
                     const ProductParams = {
                         _id: id,
-                        name: name || product.name,
-                        alias: name ? this.changeToSlug(name) : product.alias,
+                        name: product.name,
+                        alias: product.alias,
                         price: price || product.price,
                         inventory: inventory || product.inventory,
-                        arrayImage: arrayImage || product.arrayImage,
+                        images: images || product.images,
+                        linkShopee: linkShopee || product.linkShopee,
                         description: description || product.description,
                         available: available || product.available,
                         createDate: product.createDate,
                         updateDate: new Date()
                     };
+                    console.log(ProductParams);
                     this.productService.updateProduct(ProductParams, (err) => {
                         if (err) {
                             res.status(500).json({
@@ -79,7 +82,7 @@ class ProductsController {
                             });
                         }
                         else {
-                            res.status(500).json({
+                            res.status(200).json({
                                 message: 'Cập nhật sản phẩm thành công',
                                 ProductParams
                             });

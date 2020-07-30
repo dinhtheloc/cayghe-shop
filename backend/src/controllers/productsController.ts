@@ -9,14 +9,14 @@ export class ProductsController {
 
     public createProduct(req: Request, res: Response) {
 
-        const { name, alias, linkShopee, price, available, arrayImage, description, inventory } = req.body;
+        const { name, alias, linkShopee, price, available, images, description, inventory } = req.body;
         if (name) {
 
             const product: IProduct = {
                 name: name.trim(),
                 alias: alias || this.changeToSlug(name),
                 price: price || 0,
-                arrayImage: arrayImage || [],
+                images: images || [],
                 inventory: inventory || 0,
                 linkShopee: linkShopee || '',
                 description: description || '',
@@ -44,33 +44,44 @@ export class ProductsController {
     }
 
     public async updateProduct(req: Request, res: Response) {
-        const { id, name, price, available, description, arrayImage, inventory } = req.body;
+        const { id,
+            price,
+            available,
+            linkShopee,
+            description,
+            images,
+            inventory } = req.body;
+            console.log(req.body);
         if (id) {
             const params = { _id: id };
+            const product: any = await this.productService.findOne(params);
 
-            const product: any = await this.productService.findProduct(params);
+            
             if (product) {
                 product.updateDate = new Date(Date.now());
 
                 const ProductParams: IProduct = {
                     _id: id,
-                    name: name || product.name,
-                    alias: name ? this.changeToSlug(name) : product.alias,
-                    price: price || product.price,
-                    inventory: inventory || product.inventory,
-                    arrayImage: arrayImage || product.arrayImage,
-                    description: description || product.description,
-                    available: available || product.available,
+                    name: product.name,
+                    alias: product.alias,
+                    price: price ? price : product.price,
+                    inventory: inventory ? inventory : product.inventory,
+                    images: images ? images : product.images,
+                    linkShopee: linkShopee ? linkShopee : product.linkShopee,
+                    description: description ? description : product.description,
+                    available: available ? available : product.available,
                     createDate: product.createDate,
                     updateDate: new Date()
                 };
+
+                console.log(ProductParams);
                 this.productService.updateProduct(ProductParams, (err: any) => {
                     if (err) {
                         res.status(500).json({
                             message: 'Lỗi hệ thống'
                         });
                     } else {
-                        res.status(500).json({
+                        res.status(200).json({
                             message: 'Cập nhật sản phẩm thành công',
                             ProductParams
                         });

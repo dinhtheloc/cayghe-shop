@@ -18,7 +18,7 @@ export class ProductRoutes {
             this.productsController.getOne(req, res);
         });
 
-        app.put('/api/update/product', [checkJwt], (req: Request, res: Response) => {
+        app.put('/api/product/update', [checkJwt], (req: Request, res: Response) => {
             this.productsController.updateProduct(req, res);
         });
 
